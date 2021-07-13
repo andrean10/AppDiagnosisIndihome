@@ -95,4 +95,7 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="information">Informasi</string>
+    <string name="consultation_name_hint">Nama</string>
+    <string name="button_consultation_text">Lanjutkan</string>
+    <string name="symptom_category_hint">Pilih kategori gejala</string>
 </resources>

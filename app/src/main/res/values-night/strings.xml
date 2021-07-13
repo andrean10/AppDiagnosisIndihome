@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="consultation_name_hint">Nama</string>
+    <string name="button_consultation_text">Lanjutkan</string>
+    <string name="symptom_category_hint">Pilih kategori gejala</string>
+</resources>

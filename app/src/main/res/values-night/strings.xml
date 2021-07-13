@@ -3,4 +3,7 @@
     <string name="consultation_name_hint">Nama</string>
     <string name="button_consultation_text">Lanjutkan</string>
     <string name="symptom_category_hint">Pilih kategori gejala</string>
+    <string name="text_info_name">Nama_Penyakit</string>
+    <string name="text_symptomp_code">Kode_Gejala</string>
+    <string name="text_symptomp_name">Nama_Gejala</string>
 </resources>

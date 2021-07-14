@@ -103,4 +103,6 @@
     <string name="text_info_detail">Detail</string>
     <string name="text_symptomp_code">Kode_Gejala</string>
     <string name="text_symptomp_name">Nama_Gejala</string>
+    <string name="text_symptomp_save">Simpan</string>
+    <string name="text_symptomp_diagnosis">Hasil Diagnosis</string>
 </resources>

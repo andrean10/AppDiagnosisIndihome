@@ -6,20 +6,112 @@
     android:layout_height="match_parent"
     tools:context=".view.home.HomeFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_home_consultation"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
-        android:maxHeight="100dp"
-        app:cardCornerRadius="@dimen/dimen_24"
-        app:layout_constraintBottom_toTopOf="@+id/cardview_home_disease"
+        android:text="Menu"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:background="@color/teal_200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dimen_32"
+        app:columnCount="1"
+        app:rowCount="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_home_consultation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_16"
+            app:layout_gravity="center_horizontal"
+            app:cardCornerRadius="@dimen/dimen_24">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/success_color"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_32">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_8"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_consultation" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/text_home_consultation"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/home_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_16"
+            app:layout_gravity="center_horizontal"
+            app:cardCornerRadius="@dimen/dimen_24">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/success_color"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_32">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_8"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_info" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Informasi"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/home_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_16"
+            app:layout_gravity="center_horizontal"
+            app:cardCornerRadius="@dimen/dimen_24">
+
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,74 +119,9 @@
             android:background="@color/success_color"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="@dimen/dimen_32">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                tools:text="-" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/text_home_consultation"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="24sp" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_8"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_consultation" />
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_home_disease"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
-        android:maxHeight="100dp"
-        app:cardCornerRadius="@dimen/dimen_24"
-        app:layout_constraintBottom_toTopOf="@+id/cardview_home_solution"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardview_home_consultation">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/teal_200"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="@dimen/dimen_32">
-
-            <TextView
-                android:id="@+id/tv_home_disease_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                tools:text="-" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_home_disease"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="24sp" />
+            android:padding="@dimen/dimen_32"
+            app:layout_column="2"
+            app:layout_row="0">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -102,57 +129,21 @@
                 android:layout_marginTop="@dimen/dimen_8"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_info" />
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_home_solution"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        app:cardCornerRadius="@dimen/dimen_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardview_home_disease">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/warning_color"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="@dimen/dimen_32">
 
             <TextView
-                android:id="@+id/tv_home_solution_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                tools:text="-" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_home_solution"
+                android:text="Diagnosis"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="24sp" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_8"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_info" />
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+
+    </androidx.gridlayout.widget.GridLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

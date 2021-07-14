@@ -6,4 +6,5 @@
     <string name="text_info_name">Nama_Penyakit</string>
     <string name="text_symptomp_code">Kode_Gejala</string>
     <string name="text_symptomp_name">Nama_Gejala</string>
+    <string name="tab_solution">Solusi</string>
 </resources>

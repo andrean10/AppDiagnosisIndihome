@@ -94,6 +94,8 @@
     <string name="title_activity_info">InfoActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="tab_symptomp">Gejala</string>
+    <string name="tab_result">Hasil</string>
     <string name="information">Informasi</string>
     <string name="consultation_name_hint">Nama</string>
     <string name="button_consultation_text">Lanjutkan</string>
@@ -105,4 +107,9 @@
     <string name="text_symptomp_name">Nama_Gejala</string>
     <string name="text_symptomp_save">Simpan</string>
     <string name="text_symptomp_diagnosis">Hasil Diagnosis</string>
+    <string name="text_diagnosis">Diagnosis</string>
+    <string name="title_diagnosis">Konsultasi - Hasil Diagnosis</string>
+    <string name="tab_solution">Solusi</string>
+    <string name="menu_diagnosa_finish">Selesai</string>
+    <string name="menu_diagnosa_update_symptopm">Ubah Gejala</string>
 </resources>

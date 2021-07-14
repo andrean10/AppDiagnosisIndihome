@@ -112,4 +112,7 @@
     <string name="tab_solution">Solusi</string>
     <string name="menu_diagnosa_finish">Selesai</string>
     <string name="menu_diagnosa_update_symptopm">Ubah Gejala</string>
+    <string name="text_home_consultation">Konsultasi</string>
+    <string name="text_home_disease">Informasi Penyakit</string>
+    <string name="text_home_solution">Penjelasan Solusi</string>
 </resources>

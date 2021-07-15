@@ -1,4 +1,4 @@
-package com.kontrakanprojects.appbekamcbr.view.info
+package com.kontrakanprojects.appbekamcbr.view.info.viewmodel
 
 import androidx.lifecycle.ViewModel
 

@@ -1,11 +1,12 @@
 package com.kontrakanprojects.appbekamcbr.model
 
 import com.google.gson.annotations.SerializedName
+import com.kontrakanprojects.appbekamcbr.model.disease.Disease
 
 data class ResponseDisease(
 
     @field:SerializedName("result")
-    val result: List<ResultDisease>? = null,
+    val result: List<Disease>? = null,
 
     @field:SerializedName("code")
     val code: Int,
@@ -14,17 +15,3 @@ data class ResponseDisease(
     val message: String
 )
 
-data class ResultDisease(
-
-    @field:SerializedName("nm_penyakit")
-    val nmPenyakit: String? = null,
-
-    @field:SerializedName("definisi")
-    val definisi: String? = null,
-
-    @field:SerializedName("kd_penyakit")
-    val kdPenyakit: String? = null,
-
-    @field:SerializedName("id_penyakit")
-    val idPenyakit: String? = null
-)

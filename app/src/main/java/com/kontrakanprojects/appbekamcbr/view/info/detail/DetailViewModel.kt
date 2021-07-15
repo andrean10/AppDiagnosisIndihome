@@ -15,9 +15,10 @@ import javax.security.auth.callback.Callback
 class DetailViewModel: ViewModel() {
     private var _diseaseSolution: MutableLiveData<ResponseDiseaseSolution>? = null
 
-    fun getDiseaseSolution(idDisease: Int){
+    fun getDiseaseSolution(idDisease: Int): LiveData<ResponseDiseaseSolution> {
         _diseaseSolution = MutableLiveData<ResponseDiseaseSolution>()
         diseaseSolution(idDisease)
+        return _diseaseSolution as MutableLiveData<ResponseDiseaseSolution>
     }
 
     private fun diseaseSolution(idDisease: Int){

@@ -11,8 +11,10 @@ class DaftarSolusiAdapter: RecyclerView.Adapter<DaftarSolusiViewHolder>() {
     private lateinit var listSolution: ArrayList<Solution>
     private lateinit var onItemClickCallBack: OnItemClickCallBack
 
-    fun setData(listSolution: ArrayList<Solution>){
-        this.listSolution = listSolution
+    fun setData(listSolution: List<Solution>?){
+        if(listSolution == null) return
+        this.listSolution.clear()
+        this.listSolution.addAll(listSolution)
         notifyDataSetChanged()
     }
 

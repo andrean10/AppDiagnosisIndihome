@@ -3,6 +3,7 @@ package com.kontrakanprojects.appbekamcbr.view.info.daftarsolusi
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.kontrakanprojects.appbekamcbr.model.solution.ResponseSolution
 import com.kontrakanprojects.appbekamcbr.network.ApiConfig
@@ -10,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DaftarSolusiViewModel {
+class DaftarSolusiViewModel: ViewModel() {
     private var _solutions: MutableLiveData<ResponseSolution>? = null
     
     fun getListSolution(): LiveData<ResponseSolution>{

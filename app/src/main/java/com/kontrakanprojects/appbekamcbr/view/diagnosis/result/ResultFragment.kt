@@ -1,4 +1,4 @@
-package com.kontrakanprojects.appbekamcbr.view.result
+package com.kontrakanprojects.appbekamcbr.view.diagnosis.result
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.kontrakanprojects.appbekamcbr.databinding.FragmentResultBinding
+import com.kontrakanprojects.appbekamcbr.view.diagnosis.DiagnosisViewModel
 
 class ResultFragment : Fragment() {
 
     private var _binding: FragmentResultBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: ResultViewModel
+    private lateinit var viewModel: DiagnosisViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

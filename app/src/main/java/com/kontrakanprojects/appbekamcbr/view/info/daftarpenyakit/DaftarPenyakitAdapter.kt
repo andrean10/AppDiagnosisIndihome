@@ -10,12 +10,14 @@ class DaftarPenyakitAdapter: RecyclerView.Adapter<DaftarPenyakitAdapter.DaftarPe
     private lateinit var listDisease: ArrayList<Disease>
     private lateinit var onItemClickCallBack: OnItemClickCallBack
 
-    fun setData(listDisease: ArrayList<Disease>){
-        this.listDisease = listDisease
+    fun setData(listDisease: List<Disease>?){
+        if(listDisease == null) return
+        this.listDisease.clear()
+        this.listDisease.addAll(listDisease)
         notifyDataSetChanged()
     }
 
-    fun setItemClickCallBack(onItemClickCallBack: OnItemClickCallBack){
+    fun setOnItemClickCallBack(onItemClickCallBack: OnItemClickCallBack){
         this.onItemClickCallBack = onItemClickCallBack
     }
 

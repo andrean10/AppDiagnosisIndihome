@@ -3,6 +3,7 @@ package com.kontrakanprojects.appbekamcbr.view.info.daftarpenyakit
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.kontrakanprojects.appbekamcbr.model.ResponseDisease
 import com.kontrakanprojects.appbekamcbr.network.ApiConfig
@@ -10,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DaftarPenyakitViewModel {
+class DaftarPenyakitViewModel: ViewModel() {
     private var _diseases: MutableLiveData<ResponseDisease>? = null
 
     fun getListDisease(): LiveData<ResponseDisease>{

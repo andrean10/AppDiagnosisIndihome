@@ -27,16 +27,14 @@ interface ApiService {
     @GET("disease_solution/read.php")
     fun detailSolution(@Query("id") id: Int): Call<ResponseSolution>
 
-
-    /** CATEGORY ROUTE */
-
-    @GET("symptomp/read.php")
-    fun symptompByCategory(@Query("id") id: Int): Call<ResponseCategory>
-
     /** SYMPTOMP ROUTE */
 
+    @GET("symptomp/read.php")
+    fun symptompsByCategory(@Query("id") id: Int): Call<ResponseSymptoms>
+
+    /** SYMPTOMP-CATEGORY ROUTE */
     @GET("symptomp_category/read.php")
-    fun symptomps(): Call<ResponseSymptoms>
+    fun symptompCategory(): Call<ResponseCategory>
 
     /** GEJALA CONSULT ROUTE */
 

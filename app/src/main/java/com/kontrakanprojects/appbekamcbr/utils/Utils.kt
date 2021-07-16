@@ -3,6 +3,7 @@ package com.kontrakanprojects.appbekamcbr.utils
 import android.app.Activity
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
@@ -73,6 +74,11 @@ fun isLoading(
             pb.visibility = View.GONE
         }
     }
+}
+
+fun dataNotFound(ti: TextView, message: String = "Data Kosong") {
+    ti.visibility = View.VISIBLE
+    ti.text = message
 }
 
 fun isLoadingImage(state: Boolean, pb: ProgressBar) {

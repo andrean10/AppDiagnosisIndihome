@@ -5,21 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kontrakanprojects.appbekamcbr.R
 import com.kontrakanprojects.appbekamcbr.databinding.FragmentDaftarPenyakitBinding
 import com.kontrakanprojects.appbekamcbr.model.disease.Disease
+import com.kontrakanprojects.appbekamcbr.utils.dataNotFound
 import com.kontrakanprojects.appbekamcbr.utils.isLoading
 import com.kontrakanprojects.appbekamcbr.utils.showMessage
+import com.kontrakanprojects.appbekamcbr.view.info.viewmodel.InfoViewModel
 import www.sanju.motiontoast.MotionToast
 
 class DaftarPenyakitFragment : Fragment() {
 
     private var _binding: FragmentDaftarPenyakitBinding? = null
     private val binding get() = _binding!!
-    private val viewmodel by viewModels<DaftarPenyakitViewModel>()
+    private val viewmodel: InfoViewModel by activityViewModels()
     private lateinit var diseasesAdapter: DaftarPenyakitAdapter
+
+    companion object {
+        fun newInstance(): DaftarPenyakitFragment {
+            return DaftarPenyakitFragment()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +63,6 @@ class DaftarPenyakitFragment : Fragment() {
                         disease.idPenyakit,
                     )
                     //moving to detail activity
-
                 }
             })
         }
@@ -71,7 +78,7 @@ class DaftarPenyakitFragment : Fragment() {
                         val result = response.result
                         diseasesAdapter.setData(result)
                     } else {
-                        dataDiseaseNotFoound()
+                        dataNotFound(tvDaftarPenyakitNotFound, response.message)
                         showMessage(
                             requireActivity(),
                             getString(R.string.message_title_failed),
@@ -80,6 +87,7 @@ class DaftarPenyakitFragment : Fragment() {
                         )
                     }
                 }else{
+                    dataNotFound(tvDaftarPenyakitNotFound)
                     showMessage(
                         requireActivity(),
                         getString(R.string.message_title_failed),
@@ -89,14 +97,6 @@ class DaftarPenyakitFragment : Fragment() {
             })
         }
     }
-
-    private fun dataDiseaseNotFoound() {
-        with(binding) {
-            progressBar.visibility = View.GONE
-            tvDaftarPenyakitNotFound.visibility = View.VISIBLE
-        }
-    }
-
 
     override fun onDestroy() {
         super.onDestroy()

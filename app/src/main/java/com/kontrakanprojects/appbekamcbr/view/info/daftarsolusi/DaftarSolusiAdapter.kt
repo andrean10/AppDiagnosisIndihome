@@ -5,20 +5,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kontrakanprojects.appbekamcbr.databinding.InfoItemBinding
 import com.kontrakanprojects.appbekamcbr.model.solution.Solution
-import com.kontrakanprojects.appbekamcbr.view.info.daftarsolusi.DaftarSolusiAdapter.*
+import com.kontrakanprojects.appbekamcbr.view.info.daftarsolusi.DaftarSolusiAdapter.DaftarSolusiViewHolder
 
 class DaftarSolusiAdapter: RecyclerView.Adapter<DaftarSolusiViewHolder>() {
-    private lateinit var listSolution: ArrayList<Solution>
-    private lateinit var onItemClickCallBack: OnItemClickCallBack
+    private val listSolution = ArrayList<Solution>()
+    private var onItemClickCallBack: OnItemClickCallBack? = null
 
-    fun setData(listSolution: List<Solution>?){
-        if(listSolution == null) return
+    fun setData(listSolution: List<Solution>?) {
+        if (listSolution == null) return
         this.listSolution.clear()
         this.listSolution.addAll(listSolution)
         notifyDataSetChanged()
     }
 
-    fun setOnItemClickCallBack(onItemClickCallBack: OnItemClickCallBack){
+    fun setOnItemClickCallBack(onItemClickCallBack: OnItemClickCallBack) {
         this.onItemClickCallBack = onItemClickCallBack
     }
 
@@ -41,7 +41,7 @@ class DaftarSolusiAdapter: RecyclerView.Adapter<DaftarSolusiViewHolder>() {
                 tvInfoKode.text = solution.kdSolusi
                 tvInfoName.text = solution.nmSolusi
 
-                btnInfoDetail.setOnClickListener{onItemClickCallBack.onItemClicked(solution)}
+                btnInfoDetail.setOnClickListener { onItemClickCallBack?.onItemClicked(solution) }
             }
         }
     }

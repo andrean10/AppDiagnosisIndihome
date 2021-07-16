@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.kontrakanprojects.appbekamcbr.databinding.ActivityInfoBinding
-import com.kontrakanprojects.appbekamcbr.view.info.ui.main.SectionsPagerAdapter
+import com.kontrakanprojects.appbekamcbr.view.info.sectionpager.SectionsPagerAdapter
 
 class InfoActivity : AppCompatActivity() {
 

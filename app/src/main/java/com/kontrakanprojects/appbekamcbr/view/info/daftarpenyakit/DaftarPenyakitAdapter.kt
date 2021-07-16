@@ -7,17 +7,17 @@ import com.kontrakanprojects.appbekamcbr.databinding.InfoItemBinding
 import com.kontrakanprojects.appbekamcbr.model.disease.Disease
 
 class DaftarPenyakitAdapter: RecyclerView.Adapter<DaftarPenyakitAdapter.DaftarPenyakitViewHolder> () {
-    private lateinit var listDisease: ArrayList<Disease>
-    private lateinit var onItemClickCallBack: OnItemClickCallBack
+    private val listDisease = ArrayList<Disease>()
+    private var onItemClickCallBack: OnItemClickCallBack? = null
 
-    fun setData(listDisease: List<Disease>?){
-        if(listDisease == null) return
+    fun setData(listDisease: List<Disease>?) {
+        if (listDisease == null) return
         this.listDisease.clear()
         this.listDisease.addAll(listDisease)
         notifyDataSetChanged()
     }
 
-    fun setOnItemClickCallBack(onItemClickCallBack: OnItemClickCallBack){
+    fun setOnItemClickCallBack(onItemClickCallBack: OnItemClickCallBack) {
         this.onItemClickCallBack = onItemClickCallBack
     }
 
@@ -40,7 +40,7 @@ class DaftarPenyakitAdapter: RecyclerView.Adapter<DaftarPenyakitAdapter.DaftarPe
                 tvInfoKode.text = disease.kdPenyakit
                 tvInfoName.text = disease.nmPenyakit
 
-                btnInfoDetail.setOnClickListener{onItemClickCallBack.onItemClicked(disease)}
+                btnInfoDetail.setOnClickListener { onItemClickCallBack?.onItemClicked(disease) }
             }
         }
 

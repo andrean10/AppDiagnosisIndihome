@@ -119,4 +119,6 @@
     <string name="message_title_failed">Gagal</string>
     <string name="text_home_info">Informasi</string>
     <string name="text_home_diagnosis">Diagnosis</string>
+    <string name="message_title_warning">Peringatan</string>
+    <string name="label_detail_info">Info</string>
 </resources>

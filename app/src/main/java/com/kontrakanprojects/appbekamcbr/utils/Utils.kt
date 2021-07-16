@@ -76,7 +76,7 @@ fun isLoading(
     }
 }
 
-fun dataNotFound(ti: TextView, message: String = "Data Kosong") {
+fun dataNotFound(ti: TextView, message: String? = "Data Kosong") {
     ti.visibility = View.VISIBLE
     ti.text = message
 }

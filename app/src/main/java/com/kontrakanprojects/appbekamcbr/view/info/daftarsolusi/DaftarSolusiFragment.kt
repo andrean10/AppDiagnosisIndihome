@@ -1,5 +1,6 @@
 package com.kontrakanprojects.appbekamcbr.view.info.daftarsolusi
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import com.kontrakanprojects.appbekamcbr.model.solution.Solution
 import com.kontrakanprojects.appbekamcbr.utils.dataNotFound
 import com.kontrakanprojects.appbekamcbr.utils.isLoading
 import com.kontrakanprojects.appbekamcbr.utils.showMessage
+import com.kontrakanprojects.appbekamcbr.view.info.detail.DetailActivity
 import com.kontrakanprojects.appbekamcbr.view.info.viewmodel.InfoViewModel
 import www.sanju.motiontoast.MotionToast
 
@@ -28,6 +30,7 @@ class DaftarSolusiFragment : Fragment() {
         fun newInstance(): DaftarSolusiFragment {
             return DaftarSolusiFragment()
         }
+        const val EXTRA_OBJECT_SOLUTION = "EXTRA_OBJECT_SOLUTION"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +71,9 @@ class DaftarSolusiFragment : Fragment() {
                         solution.nmSolusi,
                         solution.keterangan
                     )
-                    //moving to detail activity
+                    val intent = Intent(requireActivity(), DetailActivity::class.java)
+                    intent.putExtra(EXTRA_OBJECT_SOLUTION, dataSolution)
+                    startActivity(intent)
                 }
             })
         }

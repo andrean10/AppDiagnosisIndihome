@@ -1,5 +1,6 @@
 package com.kontrakanprojects.appbekamcbr.view.info.daftarpenyakit
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.kontrakanprojects.appbekamcbr.model.disease.Disease
 import com.kontrakanprojects.appbekamcbr.utils.dataNotFound
 import com.kontrakanprojects.appbekamcbr.utils.isLoading
 import com.kontrakanprojects.appbekamcbr.utils.showMessage
+import com.kontrakanprojects.appbekamcbr.view.info.detail.DetailActivity
 import com.kontrakanprojects.appbekamcbr.view.info.viewmodel.InfoViewModel
 import www.sanju.motiontoast.MotionToast
 
@@ -27,6 +29,7 @@ class DaftarPenyakitFragment : Fragment() {
         fun newInstance(): DaftarPenyakitFragment {
             return DaftarPenyakitFragment()
         }
+        const val EXTRA_OBJECT_DISEASE = "EXTRA_OBJECT_DISEASE"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +55,7 @@ class DaftarPenyakitFragment : Fragment() {
                 setHasFixedSize(true)
                 this.adapter = diseasesAdapter
             }
+
             observeDisease()
             diseasesAdapter.setOnItemClickCallBack(object : DaftarPenyakitAdapter.OnItemClickCallBack {
                 override fun onItemClicked(disease: Disease) {
@@ -62,7 +66,9 @@ class DaftarPenyakitFragment : Fragment() {
                         disease.kdPenyakit,
                         disease.idPenyakit,
                     )
-                    //moving to detail activity
+                    val intent = Intent(requireActivity(), DetailActivity::class.java)
+                    intent.putExtra(EXTRA_OBJECT_DISEASE, dataDisease)
+                    startActivity(intent)
                 }
             })
         }

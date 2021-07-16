@@ -33,12 +33,16 @@
         android:id="@+id/infoActivity"
         android:name="com.kontrakanprojects.appbekamcbr.view.info.InfoActivity"
         android:label="activity_info"
-        tools:layout="@layout/activity_info" />
+        tools:layout="@layout/activity_info"></activity>
     <fragment
         android:id="@+id/symptompFragment"
         android:name="com.kontrakanprojects.appbekamcbr.view.consult.symptomp.SymptompFragment"
         android:label="fragment_symptomp"
-        tools:layout="@layout/fragment_symptomp" />
+        tools:layout="@layout/fragment_symptomp">
+        <argument
+            android:name="resultConsult"
+            app:argType="com.kontrakanprojects.appbekamcbr.model.consult.ResultConsult" />
+    </fragment>
     <activity
         android:id="@+id/diagnosisActivity"
         android:name="com.kontrakanprojects.appbekamcbr.view.diagnosis.DiagnosisActivity"

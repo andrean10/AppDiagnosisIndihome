@@ -10,10 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kontrakanprojects.appbekamcbr.R
 import com.kontrakanprojects.appbekamcbr.databinding.FragmentDaftarPenyakitBinding
 import com.kontrakanprojects.appbekamcbr.model.disease.Disease
-import com.kontrakanprojects.appbekamcbr.model.solution.Solution
 import com.kontrakanprojects.appbekamcbr.utils.isLoading
 import com.kontrakanprojects.appbekamcbr.utils.showMessage
-import com.kontrakanprojects.appbekamcbr.view.info.daftarsolusi.DaftarSolusiAdapter
 import www.sanju.motiontoast.MotionToast
 
 class DaftarPenyakitFragment : Fragment() {
@@ -57,6 +55,7 @@ class DaftarPenyakitFragment : Fragment() {
                         disease.idPenyakit,
                     )
                     //moving to detail activity
+
                 }
             })
         }
@@ -65,18 +64,18 @@ class DaftarPenyakitFragment : Fragment() {
 
     private fun observeDisease(){
         with(binding){
-            viewmodel.getListDisease().observe(viewLifecycleOwner,{
-                isLoading(false,progressBar)
-                if(it != null){
-                    if(it.code == 200){
-                        val result = it.result
+            viewmodel.getListDisease().observe(viewLifecycleOwner, { response ->
+                isLoading(false, progressBar)
+                if (response != null) {
+                    if (response.code == 200) {
+                        val result = response.result
                         diseasesAdapter.setData(result)
-                    }else{
+                    } else {
                         dataDiseaseNotFoound()
                         showMessage(
                             requireActivity(),
                             getString(R.string.message_title_failed),
-                            it.message,
+                            response.message,
                             style = MotionToast.TOAST_ERROR
                         )
                     }

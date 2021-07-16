@@ -11,14 +11,8 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_homeFragment_to_consultFragment2"
+            android:id="@+id/action_homeFragment_to_consultFragment"
             app:destination="@id/consultFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_daftarPenyakitFragment"
-            app:destination="@id/daftarPenyakitFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_daftarSolusiFragment"
-            app:destination="@id/daftarSolusiFragment" />
         <action
             android:id="@+id/action_homeFragment_to_infoActivity"
             app:destination="@id/infoActivity" />
@@ -27,20 +21,19 @@
         android:id="@+id/consultFragment"
         android:name="com.kontrakanprojects.appbekamcbr.view.consult.ConsultFragment"
         android:label="fragment_consult"
-        tools:layout="@layout/fragment_consult" />
-    <fragment
-        android:id="@+id/daftarPenyakitFragment"
-        android:name="com.kontrakanprojects.appbekamcbr.view.info.daftarpenyakit.DaftarPenyakitFragment"
-        android:label="fragment_daftar_penyakit"
-        tools:layout="@layout/fragment_daftar_penyakit" />
-    <fragment
-        android:id="@+id/daftarSolusiFragment"
-        android:name="com.kontrakanprojects.appbekamcbr.view.info.daftarsolusi.DaftarSolusiFragment"
-        android:label="fragment_daftar_solusi"
-        tools:layout="@layout/fragment_daftar_solusi" />
+        tools:layout="@layout/fragment_consult">
+        <action
+            android:id="@+id/action_consultFragment_to_symptompFragment"
+            app:destination="@id/symptompFragment" />
+    </fragment>
     <activity
         android:id="@+id/infoActivity"
         android:name="com.kontrakanprojects.appbekamcbr.view.info.InfoActivity"
         android:label="activity_info"
         tools:layout="@layout/activity_info" />
+    <fragment
+        android:id="@+id/symptompFragment"
+        android:name="com.kontrakanprojects.appbekamcbr.view.consult.symptomp.SymptompFragment"
+        android:label="fragment_symptomp"
+        tools:layout="@layout/fragment_symptomp" />
 </navigation>

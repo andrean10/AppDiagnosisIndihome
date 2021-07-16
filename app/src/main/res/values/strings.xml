@@ -115,4 +115,7 @@
     <string name="text_home_consultation">Konsultasi</string>
     <string name="text_home_disease">Informasi Penyakit</string>
     <string name="text_home_solution">Penjelasan Solusi</string>
+    <string name="message_daftar_penyakit_not_found">Data Penyakit tidak ditemukan</string>
+    <string name="message_daftar_solusi_not_found">Data solusi tidak ditemukan</string>
+    <string name="message_title_failed">Gagal</string>
 </resources>

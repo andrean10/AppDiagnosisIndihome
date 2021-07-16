@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_infoActivity"
             app:destination="@id/infoActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_diagnosisActivity"
+            app:destination="@+id/diagnosisActivity"/>
     </fragment>
     <fragment
         android:id="@+id/consultFragment"
@@ -36,4 +39,9 @@
         android:name="com.kontrakanprojects.appbekamcbr.view.consult.symptomp.SymptompFragment"
         android:label="fragment_symptomp"
         tools:layout="@layout/fragment_symptomp" />
+    <activity
+        android:id="@+id/diagnosisActivity"
+        android:name="com.kontrakanprojects.appbekamcbr.view.diagnosis.DiagnosisActivity"
+        android:label="activity_diagnosis"
+        tools:layout="@layout/activity_diagnosis"/>
 </navigation>

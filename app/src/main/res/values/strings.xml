@@ -118,4 +118,6 @@
     <string name="message_daftar_solusi_not_found">Data solusi tidak ditemukan</string>
     <string name="message_title_succes">Sukses</string>
     <string name="message_title_failed">Gagal</string>
+    <string name="text_home_info">Informasi</string>
+    <string name="text_home_diagnosis">Diagnosis</string>
 </resources>

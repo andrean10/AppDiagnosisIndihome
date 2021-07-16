@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.kontrakanprojects.appbekamcbr.R
 import com.kontrakanprojects.appbekamcbr.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment(), OnClickListener{
+class HomeFragment : Fragment(){
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -30,7 +30,12 @@ class HomeFragment : Fragment(), OnClickListener{
         with(binding) {
             homeConsultation.setOnClickListener { moveToConsultation() }
             homeInfo.setOnClickListener { moveToInfo() }
+            homeResult.setOnClickListener{moveToDiagnosis()}
         }
+    }
+
+    private fun moveToDiagnosis() {
+        findNavController().navigate(R.id.action_homeFragment_to_diagnosisActivity)
     }
 
     private fun moveToConsultation() {
@@ -44,11 +49,5 @@ class HomeFragment : Fragment(), OnClickListener{
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-    }
-
-    override fun onClick(v: View) {
-//        when(v.id){
-//            R.id.
-//        }
     }
 }

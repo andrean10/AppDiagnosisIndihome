@@ -1,6 +1,8 @@
 package com.kontrakanprojects.appbekamcbr.model.consult
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class ResponseConsult(
 
@@ -14,6 +16,7 @@ data class ResponseConsult(
 	val message: String
 )
 
+@Parcelize
 data class ResultConsult(
 
 	@field:SerializedName("nama")
@@ -24,4 +27,4 @@ data class ResultConsult(
 
 	@field:SerializedName("tanggal")
 	val tanggal: String? = null
-)
+) : Parcelable

@@ -35,5 +35,9 @@
         android:id="@+id/symptompFragment"
         android:name="com.kontrakanprojects.appbekamcbr.view.consult.symptomp.SymptompFragment"
         android:label="fragment_symptomp"
-        tools:layout="@layout/fragment_symptomp" />
+        tools:layout="@layout/fragment_symptomp">
+        <argument
+            android:name="resultConsult"
+            app:argType="com.kontrakanprojects.appbekamcbr.model.consult.ResultConsult" />
+    </fragment>
 </navigation>

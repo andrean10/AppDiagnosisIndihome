@@ -3,6 +3,7 @@ package com.kontrakanprojects.appbekamcbr.network
 import com.kontrakanprojects.appbekamcbr.model.ResponseDisease
 import com.kontrakanprojects.appbekamcbr.model.category.ResponseCategory
 import com.kontrakanprojects.appbekamcbr.model.consult.ResponseConsult
+import com.kontrakanprojects.appbekamcbr.model.disease.ResponseDiseaseSolution
 import com.kontrakanprojects.appbekamcbr.model.solution.ResponseSolution
 import com.kontrakanprojects.appbekamcbr.model.symptoms.ResponseSymptoms
 import retrofit2.Call
@@ -16,7 +17,7 @@ interface ApiService {
     fun disease(): Call<ResponseDisease>
 
     @GET("disease/single-read.php")
-    fun detailDisease(@Query("id") id: Int): Call<ResponseDisease>
+    fun detailDisease(@Query("id") id: Int): Call<ResponseDiseaseSolution>
 
     /** SOLUTION/TERAPI ROUTE */
 

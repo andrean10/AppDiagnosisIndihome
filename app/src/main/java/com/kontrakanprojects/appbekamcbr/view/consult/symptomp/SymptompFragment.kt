@@ -27,6 +27,10 @@ class SymptompFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // ambil data dari navigation
+        val data = SymptompFragmentArgs.fromBundle(arguments as Bundle).resultConsult
+
         with(binding) {
             btnSymptompSave.setOnClickListener { saveSymptomp() }
             btnSymptompDiagnosis.setOnClickListener { moveToDiagnosis() }

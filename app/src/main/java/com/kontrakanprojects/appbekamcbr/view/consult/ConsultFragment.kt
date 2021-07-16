@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.kontrakanprojects.appbekamcbr.R
 import com.kontrakanprojects.appbekamcbr.databinding.FragmentConsultBinding
+import com.kontrakanprojects.appbekamcbr.model.consult.ResultConsult
 import com.kontrakanprojects.appbekamcbr.utils.checkValue
 import com.kontrakanprojects.appbekamcbr.utils.showMessage
 import com.kontrakanprojects.appbekamcbr.view.consult.viewmodel.ConsultViewModel
@@ -52,7 +53,7 @@ class ConsultFragment : Fragment() {
                 viewModel.consult(nama).observe(viewLifecycleOwner, { response ->
                     if (response != null) {
                         if (response.code == 200) {
-                            moveToSymptomp()
+                            moveToSymptomp(response.result!!)
                         } else {
                             showMessage(
                                 requireActivity(), getString(R.string.message_title_failed),
@@ -70,8 +71,10 @@ class ConsultFragment : Fragment() {
         }
     }
 
-    private fun moveToSymptomp() {
-        findNavController().navigate(R.id.action_consultFragment_to_symptompFragment)
+    private fun moveToSymptomp(result: ResultConsult) {
+        val toSymptomp =
+            ConsultFragmentDirections.actionConsultFragmentToSymptompFragment(result)
+        findNavController().navigate(toSymptomp)
     }
 
     override fun onDestroy() {

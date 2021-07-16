@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">AppBekamCBR</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -98,7 +97,7 @@
     <string name="tab_result">Hasil</string>
     <string name="information">Informasi</string>
     <string name="consultation_name_hint">Nama</string>
-    <string name="button_consultation_text">Lanjutkan</string>
+    <string name="button_consultation_text">Selanjutnya</string>
     <string name="symptom_category_hint">Pilih kategori gejala</string>
     <string name="text_info_name">Nama_Penyakit/Solusi</string>
     <string name="text_info_code">Kode_Penyakit/Solusi</string>
@@ -117,5 +116,6 @@
     <string name="text_home_solution">Penjelasan Solusi</string>
     <string name="message_daftar_penyakit_not_found">Data Penyakit tidak ditemukan</string>
     <string name="message_daftar_solusi_not_found">Data solusi tidak ditemukan</string>
+    <string name="message_title_succes">Sukses</string>
     <string name="message_title_failed">Gagal</string>
 </resources>

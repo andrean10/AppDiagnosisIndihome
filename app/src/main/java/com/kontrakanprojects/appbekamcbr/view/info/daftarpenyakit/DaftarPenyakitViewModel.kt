@@ -12,6 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DaftarPenyakitViewModel: ViewModel() {
+
     private var _diseases: MutableLiveData<ResponseDisease>? = null
 
     fun getListDisease(): LiveData<ResponseDisease>{
@@ -33,6 +34,7 @@ class DaftarPenyakitViewModel: ViewModel() {
             }
 
             override fun onFailure(call: Call<ResponseDisease>, t: Throwable) {
+                _diseases?.postValue(null)
                 Log.e("Failure Response ", t.message ?: "")
             }
         })

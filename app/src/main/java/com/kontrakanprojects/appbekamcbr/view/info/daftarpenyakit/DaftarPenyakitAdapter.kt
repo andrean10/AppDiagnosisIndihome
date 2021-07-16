@@ -40,7 +40,7 @@ class DaftarPenyakitAdapter: RecyclerView.Adapter<DaftarPenyakitAdapter.DaftarPe
                 tvInfoKode.text = disease.kdPenyakit
                 tvInfoName.text = disease.nmPenyakit
 
-                btnInfoDetail.setOnClickListener { onItemClickCallBack?.onItemClicked(disease) }
+                clInfoItem.setOnClickListener { onItemClickCallBack?.onItemClicked(disease) }
             }
         }
 

@@ -41,7 +41,7 @@ class DaftarSolusiAdapter: RecyclerView.Adapter<DaftarSolusiViewHolder>() {
                 tvInfoKode.text = solution.kdSolusi
                 tvInfoName.text = solution.nmSolusi
 
-                btnInfoDetail.setOnClickListener { onItemClickCallBack?.onItemClicked(solution) }
+                clInfoItem.setOnClickListener { onItemClickCallBack?.onItemClicked(solution) }
             }
         }
     }

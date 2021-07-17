@@ -11,7 +11,7 @@ data class ResponseSymptoms(
     val code: Int? = null,
 
     @field:SerializedName("message")
-    val message: String? = null
+    val message: String
 )
 
 data class ResultSymptoms(

@@ -23,5 +23,10 @@ data class ResultCategory(
 	val keterangan: String? = null,
 
 	@field:SerializedName("id_gejala_kategori")
-	val idGejalaKategori: String? = null
-)
+	val idGejalaKategori: Int? = null
+
+) {
+	override fun toString(): String {
+		return gejalaKategori ?: super.toString()
+	}
+}

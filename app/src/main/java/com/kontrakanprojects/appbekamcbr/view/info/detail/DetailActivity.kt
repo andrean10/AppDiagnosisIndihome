@@ -111,6 +111,6 @@ class DetailActivity : AppCompatActivity() {
             stringBuilder.append(item?.solution?.nmSolusi)
             list.add(stringBuilder.toString())
         }
-        return list as MutableList<String>
+        return list
     }
 }

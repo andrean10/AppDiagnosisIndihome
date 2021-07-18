@@ -121,4 +121,6 @@
     <string name="text_home_diagnosis">Diagnosis</string>
     <string name="message_title_warning">Peringatan</string>
     <string name="label_detail_info">Info</string>
+    <string name="button_symptomp_next">Lanjut</string>
+    <string name="button_symptom_previous">Kembali</string>
 </resources>

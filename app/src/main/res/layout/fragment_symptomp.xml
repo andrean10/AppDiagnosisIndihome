@@ -6,17 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".view.consult.symptomp.SymptompFragment">
 
-    <Spinner
-        android:id="@+id/spinner"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+    <TextView
+        android:id="@+id/tv_symptomp_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:background="@color/teal_200"
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Kategori Gejala I" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_symptomp_list"
@@ -25,36 +27,37 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_symptomp_save"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_symptomp_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@+id/tv_symptomp_category"
         tools:itemCount="8"
         tools:listitem="@layout/symptomp_item" />
 
     <Button
-        android:id="@+id/btn_symptomp_save"
+        android:id="@+id/btn_symptomp_next"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/text_symptomp_save"
+        android:text="@string/button_symptomp_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rv_symptomp_list" />
 
     <Button
-        android:id="@+id/btn_symptomp_diagnosis"
+        android:id="@+id/btn_symptomp_previous"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/text_symptomp_diagnosis"
+        android:text="@string/button_symptom_previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_symptomp_save" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_symptomp_next" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

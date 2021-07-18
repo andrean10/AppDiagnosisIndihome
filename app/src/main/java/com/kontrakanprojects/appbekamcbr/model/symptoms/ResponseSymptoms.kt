@@ -29,7 +29,10 @@ data class ResultSymptoms(
     val bobotParameter: String? = null,
 
     @field:SerializedName("sympCategory")
-    val sympCategory: SympCategory? = null
+    val sympCategory: SympCategory? = null,
+
+    @field:SerializedName("isSelected")
+    var isSelected: Boolean = false
 )
 
 data class SympCategory(

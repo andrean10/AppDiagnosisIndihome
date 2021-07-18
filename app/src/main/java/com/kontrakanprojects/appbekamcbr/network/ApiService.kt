@@ -6,6 +6,7 @@ import com.kontrakanprojects.appbekamcbr.model.consult.ResponseConsult
 import com.kontrakanprojects.appbekamcbr.model.disease.ResponseDiseaseSolution
 import com.kontrakanprojects.appbekamcbr.model.solution.ResponseSolution
 import com.kontrakanprojects.appbekamcbr.model.symptoms.ResponseSymptoms
+import com.kontrakanprojects.appbekamcbr.model.symptoms_consult.ResponseSymptomConsult
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -30,7 +31,10 @@ interface ApiService {
     /** SYMPTOMP ROUTE */
 
     @GET("symptomp/read.php")
-    fun symptompsByCategory(@Query("id") id: Int): Call<ResponseSymptoms>
+    fun symptompsByCategory(
+        @Query("kategori") id_kategori: Int,
+        @Query("konsultasi") id_konsultasi: Int
+    ): Call<ResponseSymptoms>
 
     /** SYMPTOMP-CATEGORY ROUTE */
     @GET("symptomp_category/read.php")
@@ -43,11 +47,17 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("symptomp_consultation/create.php")
-    fun addSymptompConsult(@FieldMap params: HashMap<String, String>): Call<ResponseConsult>
+    fun addOrUpdateSymptompConsult(
+        @Field("list_id_gejala[]") listIdSymptoms: ArrayList<String>,
+        @Field("id_konsultasi") id: String
+    ): Call<ResponseSymptomConsult>
 
-    @FormUrlEncoded
-    @POST("symptomp_consultation/update.php")
-    fun updateConsult(@FieldMap params: HashMap<String, String>): Call<ResponseSymptoms>
+    @DELETE("symptomp_consultation/delete.php")
+    fun deleteSymptompConsult(
+        @Query("id_gejala") id_gejala: String,
+        @Query("id_konsultasi") id_konsultasi: String
+    ): Call<ResponseSymptomConsult>
+
 
     /** CONSULT ROUTE */
 

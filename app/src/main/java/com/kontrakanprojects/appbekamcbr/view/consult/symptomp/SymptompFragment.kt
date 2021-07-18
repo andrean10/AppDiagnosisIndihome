@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kontrakanprojects.appbekamcbr.R
 import com.kontrakanprojects.appbekamcbr.databinding.FragmentSymptompBinding
 import com.kontrakanprojects.appbekamcbr.model.category.ResultCategory
+import com.kontrakanprojects.appbekamcbr.model.consult.ResultConsult
+import com.kontrakanprojects.appbekamcbr.model.symptoms.ResultSymptoms
 import com.kontrakanprojects.appbekamcbr.utils.showMessage
 import com.kontrakanprojects.appbekamcbr.view.consult.viewmodel.SymptompViewModel
 import com.kontrakanprojects.appbekamcbr.view.diagnosis.DiagnosisActivity
@@ -24,6 +26,8 @@ class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private val binding get() = _binding!!
     private val viewModel by activityViewModels<SymptompViewModel>()
     private lateinit var symptompAdapter: SymptompAdapter
+    private var listSelectedSymptoms = ArrayList<String>()
+    private lateinit var data: ResultConsult
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,10 +41,12 @@ class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
         super.onViewCreated(view, savedInstanceState)
 
         // ambil data dari navigation
-        val data = SymptompFragmentArgs.fromBundle(arguments as Bundle).resultConsult
+        data = SymptompFragmentArgs.fromBundle(arguments as Bundle).resultConsult
 
         with(binding) {
-            btnSymptompSave.setOnClickListener { saveSymptomp() }
+            btnSymptompSave.setOnClickListener {
+                saveSymptomp(listSelectedSymptoms, data.idKonsultasi ?: "0")
+            }
             btnSymptompDiagnosis.setOnClickListener { moveToDiagnosis() }
             symptompAdapter = SymptompAdapter()
             with(rvSymptompList) {
@@ -49,8 +55,21 @@ class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 this.adapter = symptompAdapter
             }
         }
-
         loadCategory()
+        symptompAdapter.setOnItemClickCallback(object : SymptompAdapter.OnItemClickCallback {
+            override fun onItemSelected(symptom: ResultSymptoms) {
+                //store checked id and remove in listUnselected if exist
+                symptom.isSelected = true
+                listSelectedSymptoms.add(symptom.idGejala ?: "")
+            }
+
+            override fun onItemUnSelected(symptom: ResultSymptoms) {
+                //remove stored id in listSelected when unchecked and store in listUnselected
+                symptom.isSelected = false
+                listSelectedSymptoms.remove(symptom.idGejala ?: "")
+                deleteUnselectedSymptom(symptom.idGejala ?: "0", data.idKonsultasi ?: "0")
+            }
+        })
     }
 
 
@@ -95,24 +114,48 @@ class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
-//    private fun parseToListString(data: List<ResultCategory>?): List<String> {
-//        val result = mutableListOf<String>()
-//        data?.forEach { item ->
-//            result.add(item.gejalaKategori?: "-")
-//        }
-//        return result
-//    }
-
     private fun getSymptopByCategory(idGejalaKategori: Int?) {
-        viewModel.getSymptomp(idGejalaKategori ?: 0).observe(viewLifecycleOwner, {
-            if (it != null) {
-                if (it.code == 200) {
-                    symptompAdapter.setData(it.result)
+        viewModel.getSymptomp(idGejalaKategori ?: 0, data.idKonsultasi?.toInt() ?: 0)
+            .observe(viewLifecycleOwner, {
+                if (it != null) {
+                    if (it.code == 200) {
+                        symptompAdapter.setData(it.result)
+                    } else {
+                        showMessage(
+                            requireActivity(),
+                            getString(R.string.message_title_failed),
+                            it.message,
+                            style = MotionToast.TOAST_ERROR
+                        )
+                }
                 } else {
                     showMessage(
                         requireActivity(),
                         getString(R.string.message_title_failed),
-                        it.message,
+                        style = MotionToast.TOAST_ERROR
+                    )
+                }
+            })
+    }
+
+    private fun saveSymptomp(
+        listSelectedSymptoms: ArrayList<String>,
+        idKonsultasi: String
+    ) {
+        viewModel.symptompConsult(listSelectedSymptoms, idKonsultasi).observe(viewLifecycleOwner, {
+            if (it != null) {
+                if (it.code == 200) {
+                    showMessage(
+                        requireActivity(),
+                        getString(R.string.message_title_succes),
+                        it.message ?: "",
+                        style = MotionToast.TOAST_SUCCESS
+                    )
+                } else {
+                    showMessage(
+                        requireActivity(),
+                        getString(R.string.message_title_failed),
+                        it.message ?: "",
                         style = MotionToast.TOAST_ERROR
                     )
                 }
@@ -126,8 +169,36 @@ class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
         })
     }
 
-    private fun saveSymptomp() {
-        // untuk menyimpan nilai variabel gejala
+    private fun deleteUnselectedSymptom(idSymptom: String, idConsult: String) {
+        viewModel.deleteSymptomConsult(idSymptom, idConsult).observe(viewLifecycleOwner, {
+            if (it != null) {
+                if (it.code == 200) {
+                    showMessage(
+                        requireActivity(),
+                        getString(R.string.message_title_succes),
+                        it.message ?: "",
+                        style = MotionToast.TOAST_SUCCESS
+                    )
+                } else {
+                    showMessage(
+                        requireActivity(),
+                        getString(R.string.message_title_failed),
+                        it.message ?: "",
+                        style = MotionToast.TOAST_ERROR
+                    )
+                }
+            } else {
+                showMessage(
+                    requireActivity(),
+                    getString(R.string.message_title_failed),
+                    style = MotionToast.TOAST_ERROR
+                )
+            }
+        })
+    }
+
+    private fun deleteSymptom() {
+
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

@@ -33,7 +33,7 @@
         android:id="@+id/infoActivity"
         android:name="com.kontrakanprojects.appbekamcbr.view.info.InfoActivity"
         android:label="activity_info"
-        tools:layout="@layout/activity_info"></activity>
+        tools:layout="@layout/activity_info" />
     <fragment
         android:id="@+id/symptompFragment"
         android:name="com.kontrakanprojects.appbekamcbr.view.consult.symptomp.SymptompFragment"

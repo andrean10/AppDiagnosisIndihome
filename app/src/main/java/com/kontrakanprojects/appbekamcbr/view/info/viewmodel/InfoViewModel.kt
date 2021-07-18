@@ -47,6 +47,7 @@ class InfoViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<ResponseSolution>, t: Throwable) {
+                _solutions?.postValue(null)
                 Log.e("Failure Response ", t.message ?: "")
             }
         })
@@ -65,6 +66,7 @@ class InfoViewModel : ViewModel() {
                     val error =
                         Gson().fromJson(response.errorBody()?.string(), ResponseDisease::class.java)
                     _diseases?.postValue(error)
+                    Log.d("error response", error.toString())
                 }
             }
 

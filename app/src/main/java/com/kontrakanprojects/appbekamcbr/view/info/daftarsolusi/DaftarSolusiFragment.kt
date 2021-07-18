@@ -2,7 +2,6 @@ package com.kontrakanprojects.appbekamcbr.view.info.daftarsolusi
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -83,7 +82,6 @@ class DaftarSolusiFragment : Fragment() {
         with(binding) {
             viewModel.getListSolution().observe(viewLifecycleOwner, { response ->
                 isLoading(false, progressBar)
-                Log.d("SOLUSI", "setelah loading")
                 if (response != null) {
                     if (response.code == 200) {
                         val result = response.result

@@ -6,11 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.kontrakanprojects.appbekamcbr.model.disease.ResponseDiseaseSolution
-import com.kontrakanprojects.appbekamcbr.model.solution.ResponseSolution
 import com.kontrakanprojects.appbekamcbr.network.ApiConfig
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
 
 class DetailViewModel: ViewModel() {
     private var _diseaseSolution: MutableLiveData<ResponseDiseaseSolution>? = null
@@ -34,6 +32,7 @@ class DetailViewModel: ViewModel() {
             }
 
             override fun onFailure(call: Call<ResponseDiseaseSolution>, t: Throwable) {
+                _diseaseSolution?.postValue(null)
                 Log.e("Failure Response ", t.message ?: "")
             }
         })

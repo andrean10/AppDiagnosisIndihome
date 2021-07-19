@@ -17,8 +17,8 @@
             android:id="@+id/action_homeFragment_to_infoActivity"
             app:destination="@id/infoActivity" />
         <action
-            android:id="@+id/action_homeFragment_to_diagnosisActivity"
-            app:destination="@+id/diagnosisActivity"/>
+            android:id="@+id/action_homeFragment_to_resultFragment"
+            app:destination="@+id/resultFragment" />
     </fragment>
     <fragment
         android:id="@+id/consultFragment"
@@ -43,9 +43,9 @@
             android:name="resultConsult"
             app:argType="com.kontrakanprojects.appbekamcbr.model.consult.ResultConsult" />
     </fragment>
-    <activity
-        android:id="@+id/diagnosisActivity"
-        android:name="com.kontrakanprojects.appbekamcbr.view.diagnosis.DiagnosisActivity"
-        android:label="activity_diagnosis"
-        tools:layout="@layout/activity_diagnosis"/>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.kontrakanprojects.appbekamcbr.view.result.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" />
 </navigation>

@@ -3,7 +3,6 @@ package com.kontrakanprojects.appbekamcbr.view.home
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -30,12 +29,12 @@ class HomeFragment : Fragment(){
         with(binding) {
             homeConsultation.setOnClickListener { moveToConsultation() }
             homeInfo.setOnClickListener { moveToInfo() }
-            homeResult.setOnClickListener{moveToDiagnosis()}
+            homeResult.setOnClickListener { moveToResultDiagnosis() }
         }
     }
 
-    private fun moveToDiagnosis() {
-        findNavController().navigate(R.id.action_homeFragment_to_diagnosisActivity)
+    private fun moveToResultDiagnosis() {
+        findNavController().navigate(R.id.action_homeFragment_to_resultFragment)
     }
 
     private fun moveToConsultation() {

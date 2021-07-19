@@ -108,8 +108,6 @@
     <string name="text_diagnosis">Diagnosis</string>
     <string name="title_diagnosis">Konsultasi - Hasil Diagnosis</string>
     <string name="tab_solution">Solusi</string>
-    <string name="menu_diagnosa_finish">Selesai</string>
-    <string name="menu_diagnosa_update_symptopm">Ubah Gejala</string>
     <string name="text_home_consultation">Konsultasi</string>
     <string name="text_home_disease">Informasi Penyakit</string>
     <string name="text_home_solution">Penjelasan Solusi</string>
@@ -123,4 +121,10 @@
     <string name="label_detail_info">Info</string>
     <string name="button_symptomp_next">Lanjut</string>
     <string name="button_symptom_previous">Kembali</string>
+    <string name="button_result_finish">selesai</string>
+    <string name="button_change_symptomp">Ubah Gejala</string>
+    <string name="label_solusi">Solusi</string>
+    <string name="label_consultation">Hasil Konsultasi</string>
+    <string name="menu_diagnosa_finish">Selesai</string>
+    <string name="menu_diagnosa_update_symptopm">Ubah Gejala</string>
 </resources>

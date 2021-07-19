@@ -84,7 +84,6 @@ class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
 
     private fun moveToDiagnosis() {
-        startActivity(Intent(requireContext(), DiagnosisActivity::class.java))
     }
 
     private fun loadCategory() {

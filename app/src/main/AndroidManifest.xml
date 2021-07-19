@@ -14,7 +14,6 @@
         android:theme="@style/Theme.AppBekamCBR"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".view.diagnosis.DiagnosisActivity"></activity>
         <activity android:name=".view.info.detail.DetailActivity" />
         <activity
             android:name=".view.info.InfoActivity"

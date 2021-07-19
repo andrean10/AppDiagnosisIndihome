@@ -4,6 +4,7 @@ import com.kontrakanprojects.appbekamcbr.model.ResponseDisease
 import com.kontrakanprojects.appbekamcbr.model.category.ResponseCategory
 import com.kontrakanprojects.appbekamcbr.model.consult.ResponseConsult
 import com.kontrakanprojects.appbekamcbr.model.disease.ResponseDiseaseSolution
+import com.kontrakanprojects.appbekamcbr.model.result.ResponseResult
 import com.kontrakanprojects.appbekamcbr.model.solution.ResponseSolution
 import com.kontrakanprojects.appbekamcbr.model.symptoms.ResponseSymptoms
 import com.kontrakanprojects.appbekamcbr.model.symptoms_consult.ResponseSymptomConsult
@@ -20,13 +21,13 @@ interface ApiService {
     @GET("disease/single-read.php")
     fun detailDisease(@Query("id") id: Int): Call<ResponseDiseaseSolution>
 
+    @GET("disease/find.php")
+    fun findDisease(@Query("id") id: Int): Call<ResponseDisease>
+
     /** SOLUTION/TERAPI ROUTE */
 
     @GET("solution/read.php")
     fun solution(): Call<ResponseSolution>
-
-    @GET("disease_solution/read.php")
-    fun detailSolution(@Query("id") id: Int): Call<ResponseSolution>
 
     /** SYMPTOMP ROUTE */
 
@@ -62,7 +63,7 @@ interface ApiService {
     /** CONSULT ROUTE */
 
     @GET("consultation-result/read.php")
-    fun resultConsult(): Call<ResponseConsult>
+    fun resultConsult(@Query("konsultasi") idConsult: Int): Call<ResponseResult>
 
     @FormUrlEncoded
     @POST("consultation/create.php")

@@ -10,6 +10,7 @@ import com.kontrakanprojects.appbekamcbr.databinding.ActivityDetailBinding
 import com.kontrakanprojects.appbekamcbr.model.disease.Disease
 import com.kontrakanprojects.appbekamcbr.model.disease.ResultItem
 import com.kontrakanprojects.appbekamcbr.model.solution.Solution
+import com.kontrakanprojects.appbekamcbr.utils.EXTRA_OBJECT_TYPE
 import com.kontrakanprojects.appbekamcbr.utils.dataNotFound
 import com.kontrakanprojects.appbekamcbr.utils.showMessage
 import com.kontrakanprojects.appbekamcbr.view.info.daftarpenyakit.DaftarPenyakitFragment.Companion.EXTRA_OBJECT_DISEASE
@@ -34,7 +35,9 @@ class DetailActivity : AppCompatActivity() {
     private fun getData() {
         with(binding) {
             if (intent != null) {
-                if (intent.extras?.equals(EXTRA_OBJECT_DISEASE) != null) {
+                if (intent.extras?.getString(EXTRA_OBJECT_TYPE)
+                        .equals("disease") && intent.extras?.equals(EXTRA_OBJECT_DISEASE) != null
+                ) {
                     disease = intent.extras?.getParcelable(EXTRA_OBJECT_DISEASE)
                     idTvDetailCode.text = disease?.kdPenyakit
                     idTvDetailName.text = disease?.nmPenyakit
@@ -45,7 +48,9 @@ class DetailActivity : AppCompatActivity() {
                     listviewDetail.visibility = View.VISIBLE
 
                     observeDiseaseSolutions(disease?.idPenyakit ?: 0)
-                } else if (intent.extras?.equals(EXTRA_OBJECT_SOLUTION) != null) {
+                } else if (intent.extras?.getString(EXTRA_OBJECT_TYPE)
+                        .equals("solution") && intent.extras?.equals(EXTRA_OBJECT_SOLUTION) != null
+                ) {
                     solution = intent.extras?.getParcelable(EXTRA_OBJECT_SOLUTION)
                     idTvDetailCode.text = solution?.kdSolusi
                     idTvDetailName.text = solution?.nmSolusi

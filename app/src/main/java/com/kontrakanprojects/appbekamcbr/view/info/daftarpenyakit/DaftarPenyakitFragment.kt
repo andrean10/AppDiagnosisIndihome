@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kontrakanprojects.appbekamcbr.R
 import com.kontrakanprojects.appbekamcbr.databinding.FragmentDaftarPenyakitBinding
 import com.kontrakanprojects.appbekamcbr.model.disease.Disease
+import com.kontrakanprojects.appbekamcbr.utils.EXTRA_OBJECT_TYPE
 import com.kontrakanprojects.appbekamcbr.utils.dataNotFound
 import com.kontrakanprojects.appbekamcbr.utils.isLoading
 import com.kontrakanprojects.appbekamcbr.utils.showMessage
@@ -67,6 +68,7 @@ class DaftarPenyakitFragment : Fragment() {
                         disease.idPenyakit,
                     )
                     val intent = Intent(requireActivity(), DetailActivity::class.java)
+                    intent.putExtra(EXTRA_OBJECT_TYPE, "disease")
                     intent.putExtra(EXTRA_OBJECT_DISEASE, dataDisease)
                     startActivity(intent)
                 }

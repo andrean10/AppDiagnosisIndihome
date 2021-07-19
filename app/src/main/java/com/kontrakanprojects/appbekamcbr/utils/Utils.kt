@@ -11,6 +11,8 @@ import com.google.android.material.textfield.TextInputEditText
 import com.kontrakanprojects.appbekamcbr.R
 import www.sanju.motiontoast.MotionToast
 
+const val EXTRA_OBJECT_TYPE = "EXTRA_OBJECT_TYPE"
+
 fun View.snackbar(message: String) {
     Snackbar.make(
         this,

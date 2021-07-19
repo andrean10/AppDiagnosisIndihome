@@ -21,9 +21,6 @@ interface ApiService {
     @GET("disease/single-read.php")
     fun detailDisease(@Query("id") id: Int): Call<ResponseDiseaseSolution>
 
-    @GET("disease/find.php")
-    fun findDisease(@Query("id") id: Int): Call<ResponseDisease>
-
     /** SOLUTION/TERAPI ROUTE */
 
     @GET("solution/read.php")

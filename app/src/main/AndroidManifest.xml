@@ -20,7 +20,9 @@
             android:name=".view.info.InfoActivity"
             android:label="@string/title_activity_info"
             android:theme="@style/Theme.AppBekamCBR.NoActionBar" />
-        <activity android:name=".view.MainActivity" />
+        <activity
+            android:name=".view.MainActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".view.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

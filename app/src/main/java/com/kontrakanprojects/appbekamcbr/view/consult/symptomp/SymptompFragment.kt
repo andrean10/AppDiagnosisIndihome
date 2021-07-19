@@ -1,12 +1,10 @@
 package com.kontrakanprojects.appbekamcbr.view.consult.symptomp
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +15,6 @@ import com.kontrakanprojects.appbekamcbr.model.consult.ResultConsult
 import com.kontrakanprojects.appbekamcbr.model.symptoms.ResultSymptoms
 import com.kontrakanprojects.appbekamcbr.utils.showMessage
 import com.kontrakanprojects.appbekamcbr.view.consult.viewmodel.SymptompViewModel
-import com.kontrakanprojects.appbekamcbr.view.diagnosis.DiagnosisActivity
 import www.sanju.motiontoast.MotionToast
 
 class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -28,6 +25,7 @@ class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var symptompAdapter: SymptompAdapter
     private var listSelectedSymptoms = ArrayList<String>()
     private lateinit var data: ResultConsult
+    private lateinit var categories: ArrayList<ResultCategory>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,10 +42,8 @@ class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
         data = SymptompFragmentArgs.fromBundle(arguments as Bundle).resultConsult
 
         with(binding) {
-            btnSymptompSave.setOnClickListener {
-                saveSymptomp(listSelectedSymptoms, data.idKonsultasi ?: "0")
-            }
-            btnSymptompDiagnosis.setOnClickListener { moveToDiagnosis() }
+            btnSymptompNext.setOnClickListener { nextCategory() }
+            btnSymptompNext.setOnClickListener { moveToDiagnosis() }
             symptompAdapter = SymptompAdapter()
             with(rvSymptompList) {
                 layoutManager = LinearLayoutManager(requireContext())
@@ -67,9 +63,23 @@ class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 //remove stored id in listSelected when unchecked and store in listUnselected
                 symptom.isSelected = false
                 listSelectedSymptoms.remove(symptom.idGejala ?: "")
-                deleteUnselectedSymptom(symptom.idGejala ?: "0", data.idKonsultasi ?: "0")
             }
         })
+    }
+
+    private fun nextCategory() {
+        categories.forEachIndexed { index, resultCategory ->
+            with(binding) {
+                when (index) {
+                    0 -> btnSymptompPrevious.visibility = View.GONE
+                    categories.size - 1 -> {
+                        btnSymptompNext.text = getString(R.string.text_symptomp_save)
+                        btnSymptompPrevious.visibility = View.VISIBLE
+                    }
+                }
+            }
+            getSymptopByCategory(resultCategory.idGejalaKategori)
+        }
     }
 
 
@@ -82,19 +92,8 @@ class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
             viewModel.getCategories().observe(viewLifecycleOwner, {
                 if (it != null) {
                     if (it.code == 200) {
-                        //set data category into spinner
-                        val result = it.result as MutableList
-                        val spinnerAdapter = ArrayAdapter(
-                            requireActivity(),
-                            android.R.layout.simple_spinner_item,
-                            result
-                        )
-                        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                        with(spinner) {
-                            adapter = spinnerAdapter
-                            onItemSelectedListener = this@SymptompFragment
-                            setSelection(0)
-                        }
+                        //store in arraylist
+                        categories.addAll(it.result as ArrayList<ResultCategory>)
                     } else {
                         showMessage(
                             requireActivity(),

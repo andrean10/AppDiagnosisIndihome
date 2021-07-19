@@ -39,7 +39,8 @@ class ConsultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
-            btnConsultCreate.setOnClickListener { createConsult() }
+
+        btnConsultCreate.setOnClickListener { createConsult() }
         }
     }
 

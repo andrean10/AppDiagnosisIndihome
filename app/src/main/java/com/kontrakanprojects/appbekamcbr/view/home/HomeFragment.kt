@@ -29,12 +29,7 @@ class HomeFragment : Fragment(){
         with(binding) {
             homeConsultation.setOnClickListener { moveToConsultation() }
             homeInfo.setOnClickListener { moveToInfo() }
-            homeResult.setOnClickListener { moveToResultDiagnosis() }
         }
-    }
-
-    private fun moveToResultDiagnosis() {
-        findNavController().navigate(R.id.action_homeFragment_to_resultFragment)
     }
 
     private fun moveToConsultation() {

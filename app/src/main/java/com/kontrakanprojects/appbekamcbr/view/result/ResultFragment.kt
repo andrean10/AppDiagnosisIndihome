@@ -53,9 +53,9 @@ class ResultFragment : Fragment() {
                 this.adapter = resultAdapter
             }
         }
-        //TEMPORARY DATA
-        val idconsult = 82
-        observeResult(idconsult)
+        //data from navigation
+        val dataIdConsult = ResultFragmentArgs.fromBundle(arguments as Bundle).idConsultation
+        observeResult(dataIdConsult)
     }
 
     private fun backToConsultation() {

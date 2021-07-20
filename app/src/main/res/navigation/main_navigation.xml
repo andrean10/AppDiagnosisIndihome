@@ -16,9 +16,6 @@
         <action
             android:id="@+id/action_homeFragment_to_infoActivity"
             app:destination="@id/infoActivity" />
-        <action
-            android:id="@+id/action_homeFragment_to_resultFragment"
-            app:destination="@+id/resultFragment" />
     </fragment>
     <fragment
         android:id="@+id/consultFragment"
@@ -29,20 +26,24 @@
             android:id="@+id/action_consultFragment_to_symptompFragment"
             app:destination="@id/symptompFragment" />
     </fragment>
-    <activity
-        android:id="@+id/infoActivity"
-        android:name="com.kontrakanprojects.appbekamcbr.view.info.InfoActivity"
-        android:label="activity_info"
-        tools:layout="@layout/activity_info" />
     <fragment
         android:id="@+id/symptompFragment"
         android:name="com.kontrakanprojects.appbekamcbr.view.consult.symptomp.SymptompFragment"
         android:label="fragment_symptomp"
         tools:layout="@layout/fragment_symptomp">
+        <action
+            android:id="@+id/action_symptompFragment_to_resultFragment"
+            app:destination="@+id/resultFragment" />
         <argument
             android:name="resultConsult"
             app:argType="com.kontrakanprojects.appbekamcbr.model.consult.ResultConsult" />
     </fragment>
+    <activity
+        android:id="@+id/infoActivity"
+        android:name="com.kontrakanprojects.appbekamcbr.view.info.InfoActivity"
+        android:label="activity_info"
+        tools:layout="@layout/activity_info" />
+
     <fragment
         android:id="@+id/resultFragment"
         android:name="com.kontrakanprojects.appbekamcbr.view.result.ResultFragment"
@@ -54,5 +55,8 @@
             app:launchSingleTop="false"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="idConsultation"
+            app:argType="integer" />
     </fragment>
 </navigation>

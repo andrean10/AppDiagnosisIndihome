@@ -54,7 +54,7 @@ class ResultFragment : Fragment() {
             }
         }
         //TEMPORARY DATA
-        var idconsult = 82
+        val idconsult = 82
         observeResult(idconsult)
     }
 
@@ -63,7 +63,7 @@ class ResultFragment : Fragment() {
     }
 
     private fun finishConsultation() {
-        TODO("Not yet implemented")
+        findNavController().navigate(R.id.action_resultFragment_to_homeFragment)
     }
 
     private fun observeResult(idConsult: Int) {

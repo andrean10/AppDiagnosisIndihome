@@ -132,7 +132,7 @@ class ResultFragment : Fragment() {
 
     private fun parseToListString(result: List<ResultItem?>): List<String> {
         val list: MutableList<String> = mutableListOf()
-        result?.forEach { item ->
+        result.forEach { item ->
             val stringBuilder = StringBuilder()
             stringBuilder.append("[")
             stringBuilder.append(item?.solution?.kdSolusi)

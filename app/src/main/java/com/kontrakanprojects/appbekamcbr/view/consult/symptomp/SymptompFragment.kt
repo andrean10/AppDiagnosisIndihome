@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kontrakanprojects.appbekamcbr.R
 import com.kontrakanprojects.appbekamcbr.databinding.FragmentSymptompBinding
@@ -17,7 +17,7 @@ import com.kontrakanprojects.appbekamcbr.utils.showMessage
 import com.kontrakanprojects.appbekamcbr.view.consult.viewmodel.SymptompViewModel
 import www.sanju.motiontoast.MotionToast
 
-class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
+class SymptompFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentSymptompBinding? = null
     private val binding get() = _binding!!
@@ -26,6 +26,7 @@ class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var listSelectedSymptoms = ArrayList<String>()
     private lateinit var data: ResultConsult
     private lateinit var categories: ArrayList<ResultCategory>
+    private var index = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,14 +38,18 @@ class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        initViews()
         // ambil data dari navigation
         data = SymptompFragmentArgs.fromBundle(arguments as Bundle).resultConsult
+    }
 
+    private fun initViews() {
+        symptompAdapter = SymptompAdapter()
+        categories = ArrayList()
         with(binding) {
-            btnSymptompNext.setOnClickListener { nextCategory() }
-            btnSymptompNext.setOnClickListener { moveToDiagnosis() }
-            symptompAdapter = SymptompAdapter()
+            btnSymptompNext.setOnClickListener(this@SymptompFragment)
+            btnSymptompPrevious.setOnClickListener(this@SymptompFragment)
+            btnSymptompDiagnosis.setOnClickListener(this@SymptompFragment)
             with(rvSymptompList) {
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
@@ -52,6 +57,26 @@ class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
         }
         loadCategory()
+    }
+
+    private fun prepareViews() {
+        with(binding) {
+            //show-hide buttons based category index
+            when (index) {
+                0 -> btnSymptompPrevious.visibility = View.INVISIBLE
+                categories.size - 1 -> {
+                    btnSymptompDiagnosis.visibility = View.VISIBLE
+                    btnSymptompNext.visibility = View.GONE
+                }
+                else -> {
+                    btnSymptompPrevious.visibility = View.VISIBLE
+                    btnSymptompNext.visibility = View.VISIBLE
+                    btnSymptompDiagnosis.visibility = View.GONE
+                }
+            }
+            tvSymptompCategory.text = categories[index].gejalaKategori
+        }
+
         symptompAdapter.setOnItemClickCallback(object : SymptompAdapter.OnItemClickCallback {
             override fun onItemSelected(symptom: ResultSymptoms) {
                 //store checked id and remove in listUnselected if exist
@@ -67,49 +92,56 @@ class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
         })
     }
 
-    private fun nextCategory() {
-        categories.forEachIndexed { index, resultCategory ->
-            with(binding) {
-                when (index) {
-                    0 -> btnSymptompPrevious.visibility = View.GONE
-                    categories.size - 1 -> {
-                        btnSymptompNext.text = getString(R.string.text_symptomp_save)
-                        btnSymptompPrevious.visibility = View.VISIBLE
-                    }
-                }
-            }
-            getSymptopByCategory(resultCategory.idGejalaKategori)
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btn_symptomp_next -> nextCategory()
+            R.id.btn_symptomp_previous -> previousCategory()
+            R.id.btn_symptomp_diagnosis -> moveToResultDiagnosis(data.idKonsultasi?.toInt() ?: 0)
         }
     }
 
+    private fun moveToResultDiagnosis(idConsult: Int) {
+        val toResultDiagnosis =
+            SymptompFragmentDirections.actionSymptompFragmentToResultFragment(idConsult)
+        findNavController().navigate(toResultDiagnosis)
+    }
 
-    private fun moveToDiagnosis() {
+    private fun nextCategory() {
+        index++
+        if (index != categories.size) getSymptopByCategory(categories[index].idGejalaKategori)
+    }
+
+    private fun previousCategory() {
+        index--
+        if (index != -1) getSymptopByCategory(categories[index].idGejalaKategori)
     }
 
     private fun loadCategory() {
-        with(binding) {
-            viewModel.getCategories().observe(viewLifecycleOwner, {
-                if (it != null) {
-                    if (it.code == 200) {
-                        //store in arraylist
-                        categories.addAll(it.result as ArrayList<ResultCategory>)
-                    } else {
-                        showMessage(
-                            requireActivity(),
-                            getString(R.string.message_title_failed),
-                            it.message,
-                            style = MotionToast.TOAST_ERROR
-                        )
-                    }
+        viewModel.getCategories().observe(viewLifecycleOwner, {
+            if (it != null) {
+                if (it.code == 200) {
+                    //store in arraylist
+                    categories.addAll(it.result as ArrayList<ResultCategory>)
+                    //force to load data the first symptomp category
+                    getSymptopByCategory(categories[index].idGejalaKategori)
+                    //prepareViews
+                    prepareViews()
                 } else {
                     showMessage(
                         requireActivity(),
                         getString(R.string.message_title_failed),
+                        it.message,
                         style = MotionToast.TOAST_ERROR
                     )
                 }
-            })
-        }
+            } else {
+                showMessage(
+                    requireActivity(),
+                    getString(R.string.message_title_failed),
+                    style = MotionToast.TOAST_ERROR
+                )
+            }
+        })
     }
 
     private fun getSymptopByCategory(idGejalaKategori: Int?) {
@@ -118,6 +150,7 @@ class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 if (it != null) {
                     if (it.code == 200) {
                         symptompAdapter.setData(it.result)
+                        prepareViews()
                     } else {
                         showMessage(
                             requireActivity(),
@@ -198,24 +231,8 @@ class SymptompFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun deleteSymptom() {
 
     }
-
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val category = parent?.selectedItem as ResultCategory
-        getSymptopByCategory(category.idGejalaKategori)
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-        showMessage(
-            requireActivity(),
-            getString(R.string.message_title_warning),
-            "Tidak Ada kategori yang dipilih",
-            style = MotionToast.TOAST_WARNING
-        )
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
-
 }

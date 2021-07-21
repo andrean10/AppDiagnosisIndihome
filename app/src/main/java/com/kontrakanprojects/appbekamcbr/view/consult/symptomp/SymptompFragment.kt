@@ -1,6 +1,7 @@
 package com.kontrakanprojects.appbekamcbr.view.consult.symptomp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,9 +25,13 @@ class SymptompFragment : Fragment(), View.OnClickListener {
     private val viewModel by activityViewModels<SymptompViewModel>()
     private lateinit var symptompAdapter: SymptompAdapter
     private var listSelectedSymptoms = ArrayList<String>()
+    private var listSelectedByCategory = ArrayList<ResultSymptoms>()
     private lateinit var data: ResultConsult
     private lateinit var categories: ArrayList<ResultCategory>
     private var index = 0
+    private var isPrevious = false
+
+    private val TAG = SymptompFragment::class.simpleName
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,12 +87,26 @@ class SymptompFragment : Fragment(), View.OnClickListener {
                 //store checked id and remove in listUnselected if exist
                 symptom.isSelected = true
                 listSelectedSymptoms.add(symptom.idGejala ?: "")
+                listSelectedByCategory.add(symptom)
+                Log.d(TAG, "onItemSelected: $symptom telah ditambahkan")
+                Log.d(TAG, "onItemSelected: $listSelectedSymptoms isi setelah ditambahkan")
+                Log.d(
+                    TAG,
+                    "onItemSelected: $listSelectedByCategory isi setelah ditambahkan di kategori"
+                )
             }
 
             override fun onItemUnSelected(symptom: ResultSymptoms) {
                 //remove stored id in listSelected when unchecked and store in listUnselected
                 symptom.isSelected = false
                 listSelectedSymptoms.remove(symptom.idGejala ?: "")
+                listSelectedByCategory.remove(symptom)
+                Log.d(TAG, "onItemSelected: $symptom telah dihapus")
+                Log.d(TAG, "onItemSelected: $listSelectedSymptoms isi setelah dihapus")
+                Log.d(
+                    TAG,
+                    "onItemSelected: $listSelectedByCategory isi setelah dihapus di kategori"
+                )
             }
         })
     }
@@ -108,12 +127,19 @@ class SymptompFragment : Fragment(), View.OnClickListener {
 
     private fun nextCategory() {
         index++
-        if (index != categories.size) getSymptopByCategory(categories[index].idGejalaKategori)
+        if (index != categories.size) {
+            getSymptopByCategory(categories[index].idGejalaKategori)
+        } else {
+//            saveSymptomp(listSelectedSymptoms, data.idKonsultasi.toString())
+            Log.d(TAG, "nextCategory: $index => index terakhir")
+            Log.d(TAG, "nextCategory: $listSelectedSymptoms , isi list yang sudah dipilih")
+        }
     }
 
     private fun previousCategory() {
         index--
         if (index != -1) getSymptopByCategory(categories[index].idGejalaKategori)
+        isPrevious = true
     }
 
     private fun loadCategory() {
@@ -149,6 +175,25 @@ class SymptompFragment : Fragment(), View.OnClickListener {
             .observe(viewLifecycleOwner, {
                 if (it != null) {
                     if (it.code == 200) {
+                        // jika dia kembali maka check user saat checklis item sebelumnya
+                        // dengan cara mengecek data result yang sudah ditambahkan
+                        // lalu
+                        Log.d(TAG, "getSymptopByCategory: Apakah Kembali ? $isPrevious")
+                        if (isPrevious) {
+                            listSelectedSymptoms.forEachIndexed { _, idGejala ->
+                                it.result!!.forEach { resultSymptoms ->
+                                    if (resultSymptoms.idGejala == idGejala) {
+                                        resultSymptoms.isSelected = true
+
+                                        Log.d(
+                                            TAG,
+                                            "getSymptopByCategory: Dijalankan karena dipilih $resultSymptoms"
+                                        )
+                                    }
+                                }
+                            }
+                        }
+
                         symptompAdapter.setData(it.result)
                         prepareViews()
                     } else {
@@ -158,7 +203,7 @@ class SymptompFragment : Fragment(), View.OnClickListener {
                             it.message,
                             style = MotionToast.TOAST_ERROR
                         )
-                }
+                    }
                 } else {
                     showMessage(
                         requireActivity(),
@@ -231,6 +276,7 @@ class SymptompFragment : Fragment(), View.OnClickListener {
     private fun deleteSymptom() {
 
     }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

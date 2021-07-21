@@ -8,8 +8,13 @@ import com.kontrakanprojects.appbekamcbr.model.symptoms.ResultSymptoms
 
 class SymptompAdapter : RecyclerView.Adapter<SymptompAdapter.SymptompViewHolder>() {
     private val listSymptomp = ArrayList<ResultSymptoms>()
-    private val listSelectedSymptomp = ArrayList<ResultSymptoms>()
+
+    //    private val listSelectedSymptomp = ArrayList<ResultSymptoms>()
     private var onItemClickCallback: OnItemClickCallback? = null
+
+    fun setSelectedSymtomp() {
+
+    }
 
     fun setData(listSymptomp: List<ResultSymptoms>?) {
         if (listSymptomp == null) return
@@ -17,7 +22,6 @@ class SymptompAdapter : RecyclerView.Adapter<SymptompAdapter.SymptompViewHolder>
         this.listSymptomp.addAll(listSymptomp)
         notifyDataSetChanged()
     }
-
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
@@ -43,7 +47,6 @@ class SymptompAdapter : RecyclerView.Adapter<SymptompAdapter.SymptompViewHolder>
     inner class SymptompViewHolder(private val binding: SymptompItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         lateinit var mItem: ResultSymptoms
-
 
         fun bind(symptom: ResultSymptoms) {
             with(binding) {

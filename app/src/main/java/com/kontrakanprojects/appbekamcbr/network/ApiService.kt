@@ -19,7 +19,7 @@ interface ApiService {
     fun disease(): Call<ResponseDisease>
 
     @GET("disease/single-read.php")
-    fun detailDisease(@Query("id") id: Int): Call<ResponseDiseaseSolution>
+    fun detailDisease(@Query("id") id: String): Call<ResponseDiseaseSolution>
 
     /** SOLUTION/TERAPI ROUTE */
 
@@ -30,8 +30,8 @@ interface ApiService {
 
     @GET("symptomp/read.php")
     fun symptompsByCategory(
-        @Query("kategori") id_kategori: Int,
-        @Query("konsultasi") id_konsultasi: Int
+        @Query("kategori") id_kategori: String,
+        @Query("konsultasi") id_konsultasi: String
     ): Call<ResponseSymptoms>
 
     /** SYMPTOMP-CATEGORY ROUTE */
@@ -41,26 +41,25 @@ interface ApiService {
     /** GEJALA CONSULT ROUTE */
 
     @GET("symptomp_consultation/read.php")
-    fun symptompConsult(@Query("id_konsultasi") id: Int): Call<ResponseConsult>
+    fun symptompConsult(@Query("id_konsultasi") id: String): Call<ResponseConsult>
 
     @FormUrlEncoded
     @POST("symptomp_consultation/create.php")
     fun addOrUpdateSymptompConsult(
-        @Field("list_id_gejala[]") listIdSymptoms: ArrayList<String>,
+        @Field("list_id_gejala") listIdSymptoms: ArrayList<String>,
         @Field("id_konsultasi") id: String
     ): Call<ResponseSymptomConsult>
 
     @DELETE("symptomp_consultation/delete.php")
-    fun deleteSymptompConsult(
-        @Query("id_gejala") id_gejala: String,
-        @Query("id_konsultasi") id_konsultasi: String
-    ): Call<ResponseSymptomConsult>
+    fun resetConsult(
+        @Query("konsultasi") id_konsultasi: String
+    ): Call<ResponseConsult>
 
 
     /** CONSULT ROUTE */
 
     @GET("consultation-result/read.php")
-    fun resultConsult(@Query("konsultasi") idConsult: Int): Call<ResponseResult>
+    fun resultConsult(@Query("konsultasi") idConsult: String): Call<ResponseResult>
 
     @FormUrlEncoded
     @POST("consultation/create.php")

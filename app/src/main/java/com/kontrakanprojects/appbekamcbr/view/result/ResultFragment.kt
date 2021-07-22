@@ -23,6 +23,7 @@ class ResultFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel by activityViewModels<ResultViewModel>()
     private lateinit var resultAdapter: ResultAdapter
+    private lateinit var dataIdConsult: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,11 +55,13 @@ class ResultFragment : Fragment() {
             }
         }
         //data from navigation
-        val dataIdConsult = ResultFragmentArgs.fromBundle(arguments as Bundle).idConsultation
+        dataIdConsult = ResultFragmentArgs.fromBundle(arguments as Bundle).idConsultation
+
         observeResult(dataIdConsult)
     }
 
     private fun backToConsultation() {
+        observeResetConsult(dataIdConsult)
         findNavController().navigateUp()
     }
 
@@ -66,7 +69,7 @@ class ResultFragment : Fragment() {
         findNavController().navigate(R.id.action_resultFragment_to_homeFragment)
     }
 
-    private fun observeResult(idConsult: Int) {
+    private fun observeResult(idConsult: String) {
         viewModel.result(idConsult).observe(viewLifecycleOwner, {
             isLoading(false, binding.progressBarResult)
             if (it != null) {
@@ -74,7 +77,7 @@ class ResultFragment : Fragment() {
                     resultAdapter.setData(it.result)
                     binding.tvResultDescription.text =
                         convertToSentece(resultAdapter.getDiseaseDiagnosis())
-                    observeSolution(resultAdapter.getDiseaseDiagnosis()?.idPenyakit ?: 0)
+                    observeSolution(resultAdapter.getDiseaseDiagnosis()?.idPenyakit.toString())
                 } else {
                     showMessage(
                         requireActivity(),
@@ -93,7 +96,7 @@ class ResultFragment : Fragment() {
         })
     }
 
-    private fun observeSolution(idDisease: Int) {
+    private fun observeSolution(idDisease: String) {
         viewModel.solutions(idDisease).observe(viewLifecycleOwner, {
             isLoading(false, binding.progressBarResult)
             if (it != null) {
@@ -104,6 +107,34 @@ class ResultFragment : Fragment() {
                         requireActivity(),
                         getString(R.string.message_title_failed),
                         it.message ?: "",
+                        style = MotionToast.TOAST_ERROR
+                    )
+                }
+            } else {
+                showMessage(
+                    requireActivity(),
+                    getString(R.string.message_title_failed),
+                    style = MotionToast.TOAST_ERROR
+                )
+            }
+        })
+    }
+
+    private fun observeResetConsult(idConsult: String) {
+        viewModel.resetingConsult(idConsult).observe(viewLifecycleOwner, {
+            if (it != null) {
+                if (it.code == 200) {
+                    showMessage(
+                        requireActivity(),
+                        getString(R.string.message_title_succes),
+                        it.message,
+                        style = MotionToast.TOAST_SUCCESS
+                    )
+                } else {
+                    showMessage(
+                        requireActivity(),
+                        getString(R.string.message_title_failed),
+                        it.message,
                         style = MotionToast.TOAST_ERROR
                     )
                 }

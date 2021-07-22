@@ -23,7 +23,7 @@ data class ResultCategory(
 	val keterangan: String? = null,
 
 	@field:SerializedName("id_gejala_kategori")
-	val idGejalaKategori: Int? = null
+	val idGejalaKategori: String? = null
 
 ) {
 	override fun toString(): String {

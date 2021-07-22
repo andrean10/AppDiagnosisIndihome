@@ -13,20 +13,26 @@ import retrofit2.Response
 class DetailViewModel: ViewModel() {
     private var _diseaseSolution: MutableLiveData<ResponseDiseaseSolution>? = null
 
-    fun getDiseaseSolution(idDisease: Int): LiveData<ResponseDiseaseSolution> {
+    fun getDiseaseSolution(idDisease: String): LiveData<ResponseDiseaseSolution> {
         _diseaseSolution = MutableLiveData<ResponseDiseaseSolution>()
         diseaseSolution(idDisease)
         return _diseaseSolution as MutableLiveData<ResponseDiseaseSolution>
     }
 
-    private fun diseaseSolution(idDisease: Int){
+    private fun diseaseSolution(idDisease: String) {
         val client = ApiConfig.getApiService().detailDisease(idDisease)
         client.enqueue(object : retrofit2.Callback<ResponseDiseaseSolution> {
-            override fun onResponse(call: Call<ResponseDiseaseSolution>, response: Response<ResponseDiseaseSolution>) {
+            override fun onResponse(
+                call: Call<ResponseDiseaseSolution>,
+                response: Response<ResponseDiseaseSolution>
+            ) {
                 if (response.isSuccessful) {
                     _diseaseSolution?.postValue(response.body())
                 } else {
-                    val error = Gson().fromJson(response.errorBody()?.string(), ResponseDiseaseSolution::class.java)
+                    val error = Gson().fromJson(
+                        response.errorBody()?.string(),
+                        ResponseDiseaseSolution::class.java
+                    )
                     _diseaseSolution?.postValue(error)
                 }
             }

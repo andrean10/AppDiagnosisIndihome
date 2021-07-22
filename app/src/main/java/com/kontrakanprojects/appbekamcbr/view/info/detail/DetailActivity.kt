@@ -49,7 +49,7 @@ class DetailActivity : AppCompatActivity() {
                     tvDetailLabelSolusi.visibility = View.VISIBLE
                     listviewDetail.visibility = View.VISIBLE
 
-                    observeDiseaseSolutions(disease?.idPenyakit ?: 0)
+                    observeDiseaseSolutions(disease?.idPenyakit.toString())
                 } else if (intent.extras?.getString(EXTRA_OBJECT_TYPE)
                         .equals("solution") && intent.extras?.equals(EXTRA_OBJECT_SOLUTION) != null
                 ) {
@@ -69,7 +69,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeDiseaseSolutions(idPenyakit: Int) {
+    private fun observeDiseaseSolutions(idPenyakit: String) {
         with(binding) {
             viewmodel.getDiseaseSolution(idPenyakit).observe(this@DetailActivity, {
                 isLoading(false, progressBar)

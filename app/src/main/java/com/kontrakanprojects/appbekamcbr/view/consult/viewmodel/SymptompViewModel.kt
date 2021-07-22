@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.kontrakanprojects.appbekamcbr.model.category.ResponseCategory
 import com.kontrakanprojects.appbekamcbr.model.symptoms.ResponseSymptoms
+import com.kontrakanprojects.appbekamcbr.model.symptoms.ResultSymptoms
 import com.kontrakanprojects.appbekamcbr.model.symptoms_consult.ResponseSymptomConsult
 import com.kontrakanprojects.appbekamcbr.network.ApiConfig
 import retrofit2.Call
@@ -18,6 +19,10 @@ class SymptompViewModel : ViewModel() {
     private var _symptomp: MutableLiveData<ResponseSymptoms>? = null
     private var _symptompsConsult: MutableLiveData<ResponseSymptomConsult>? = null
     private var _categories: MutableLiveData<ResponseCategory>? = null
+    private var _selectedIds: MutableLiveData<ArrayList<String>> = MutableLiveData()
+    private var _selectedSymptomps: MutableLiveData<ArrayList<ResultSymptoms>> = MutableLiveData()
+//    private var _index: String =
+
 
     fun symptompConsult(
         listSelectedIdSymp: ArrayList<String>,
@@ -28,10 +33,22 @@ class SymptompViewModel : ViewModel() {
         return _symptompsConsult as MutableLiveData<ResponseSymptomConsult>
     }
 
-    fun deleteSymptomConsult(idSymp: String, idConsult: String): LiveData<ResponseSymptomConsult> {
-        deleteSymptomp(idSymp, idConsult)
-        return _symptompsConsult as MutableLiveData<ResponseSymptomConsult>
+    fun setSelectedSymptomps(selectedSymptoms: ArrayList<ResultSymptoms>) {
+        _selectedSymptomps.postValue((selectedSymptoms))
     }
+
+    fun setSelectedIdsSymtomps(idsSelectedSymps: ArrayList<String>) {
+        _selectedIds.postValue(idsSelectedSymps)
+    }
+
+    fun getSelectedIdsSymptomps(): LiveData<ArrayList<String>> {
+        return _selectedIds as MutableLiveData<ArrayList<String>>
+    }
+
+    fun getSelectedSymptomps(): LiveData<ArrayList<ResultSymptoms>> {
+        return _selectedSymptomps as MutableLiveData<ArrayList<ResultSymptoms>>
+    }
+
 
     fun getCategories(): LiveData<ResponseCategory> {
         _categories = MutableLiveData()
@@ -39,13 +56,13 @@ class SymptompViewModel : ViewModel() {
         return _categories as MutableLiveData<ResponseCategory>
     }
 
-    fun getSymptomp(idCategory: Int, idConsult: Int): LiveData<ResponseSymptoms> {
+    fun getSymptomp(idCategory: String, idConsult: String): LiveData<ResponseSymptoms> {
         _symptomp = MutableLiveData()
         listSymptompByCategory(idCategory, idConsult)
         return _symptomp as MutableLiveData<ResponseSymptoms>
     }
 
-    private fun listSymptompByCategory(idCategory: Int, idConsult: Int) {
+    private fun listSymptompByCategory(idCategory: String, idConsult: String) {
         val client = ApiConfig.getApiService().symptompsByCategory(idCategory, idConsult)
         client.enqueue(object : Callback<ResponseSymptoms> {
             override fun onResponse(
@@ -125,29 +142,4 @@ class SymptompViewModel : ViewModel() {
         })
     }
 
-    private fun deleteSymptomp(idSymptom: String, idConsult: String) {
-        val client = ApiConfig.getApiService().deleteSymptompConsult(idSymptom, idConsult)
-        client.enqueue(object : Callback<ResponseSymptomConsult> {
-            override fun onResponse(
-                call: Call<ResponseSymptomConsult>,
-                response: Response<ResponseSymptomConsult>
-            ) {
-                if (response.isSuccessful) {
-                    _symptompsConsult?.postValue(response.body())
-                } else {
-                    val error = Gson().fromJson(
-                        response.errorBody()?.string(),
-                        ResponseSymptomConsult::class.java
-                    )
-                    _symptompsConsult?.postValue(error)
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseSymptomConsult>, t: Throwable) {
-                _symptomp?.postValue(null)
-                Log.e("Failure Response ", t.message ?: "")
-            }
-
-        })
-    }
 }

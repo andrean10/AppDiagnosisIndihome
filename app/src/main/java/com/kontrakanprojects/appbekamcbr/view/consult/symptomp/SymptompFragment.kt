@@ -17,6 +17,7 @@ import com.kontrakanprojects.appbekamcbr.model.category.ResultCategory
 import com.kontrakanprojects.appbekamcbr.model.consult.ResultConsult
 import com.kontrakanprojects.appbekamcbr.model.symptoms.ResultSymptoms
 import com.kontrakanprojects.appbekamcbr.utils.showMessage
+import com.kontrakanprojects.appbekamcbr.utils.snackbar
 import com.kontrakanprojects.appbekamcbr.view.consult.viewmodel.SymptompViewModel
 import www.sanju.motiontoast.MotionToast
 
@@ -26,11 +27,12 @@ class SymptompFragment : Fragment(), View.OnClickListener {
     private val binding get() = _binding!!
     private val viewModel by activityViewModels<SymptompViewModel>()
     private lateinit var symptompAdapter: SymptompAdapter
-    private var listSelectedSymptoms = ArrayList<String>()
-    private var listSelectedByCategory = ArrayList<ResultSymptoms>()
+    private var listSelectedIds = ArrayList<String>()
+    private var listSelectedSymptomps = ArrayList<ResultSymptoms>()
     private lateinit var data: ResultConsult
     private lateinit var categories: ArrayList<ResultCategory>
     private var index = 0
+    private var numSelectedSymptomps = 0
 
     private val TAG = SymptompFragment::class.simpleName
 
@@ -79,6 +81,7 @@ class SymptompFragment : Fragment(), View.OnClickListener {
                 0 -> btnSymptompPrevious.visibility = View.INVISIBLE
                 categories.size - 1 -> {
                     btnSymptompDiagnosis.visibility = View.VISIBLE
+                    btnSymptompPrevious.visibility = View.VISIBLE
                     btnSymptompNext.visibility = View.GONE
                 }
                 else -> {
@@ -87,8 +90,6 @@ class SymptompFragment : Fragment(), View.OnClickListener {
                     btnSymptompDiagnosis.visibility = View.GONE
                 }
             }
-//            tvSymptompCategory.text = categories[index].gejalaKategori
-
             setTitle(categories[index].gejalaKategori.toString())
         }
 
@@ -96,26 +97,28 @@ class SymptompFragment : Fragment(), View.OnClickListener {
             override fun onItemSelected(symptom: ResultSymptoms) {
                 //store checked id and remove in listUnselected if exist
                 symptom.isSelected = true
-                listSelectedSymptoms.add(symptom.idGejala ?: "")
-                listSelectedByCategory.add(symptom)
+                listSelectedIds.add(symptom.idGejala.toString())
+                listSelectedSymptomps.add(symptom)
+                numSelectedSymptomps++
                 Log.d(TAG, "onItemSelected: $symptom telah ditambahkan")
-                Log.d(TAG, "onItemSelected: $listSelectedSymptoms isi setelah ditambahkan")
+                Log.d(TAG, "onItemSelected: $listSelectedIds isi setelah ditambahkan")
                 Log.d(
                     TAG,
-                    "onItemSelected: $listSelectedByCategory isi setelah ditambahkan di kategori"
+                    "onItemSelected: $listSelectedSymptomps isi setelah ditambahkan di kategori"
                 )
             }
 
             override fun onItemUnSelected(symptom: ResultSymptoms) {
                 //remove stored id in listSelected when unchecked and store in listUnselected
                 symptom.isSelected = false
-                listSelectedSymptoms.remove(symptom.idGejala ?: "")
-                listSelectedByCategory.remove(symptom)
+                listSelectedIds.remove(symptom.idGejala ?: "")
+                listSelectedSymptomps.remove(symptom)
+                numSelectedSymptomps--
                 Log.d(TAG, "onItemSelected: $symptom telah dihapus")
-                Log.d(TAG, "onItemSelected: $listSelectedSymptoms isi setelah dihapus")
+                Log.d(TAG, "onItemSelected: $listSelectedIds isi setelah dihapus")
                 Log.d(
                     TAG,
-                    "onItemSelected: $listSelectedByCategory isi setelah dihapus di kategori"
+                    "onItemSelected: $listSelectedSymptomps isi setelah dihapus di kategori"
                 )
             }
         })
@@ -123,20 +126,40 @@ class SymptompFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btn_symptomp_next -> nextCategory()
-            R.id.btn_symptomp_previous -> previousCategory()
+            R.id.btn_symptomp_next -> {
+                if (hasSelectingAnySymptomp()) nextCategory()
+            }
+            R.id.btn_symptomp_previous -> {
+                if (hasSelectingAnySymptomp()) previousCategory()
+            }
             R.id.btn_symptomp_diagnosis -> {
-                saveSymptomp(listSelectedSymptoms, data.idKonsultasi.toString())
-
-                moveToResultDiagnosis(data.idKonsultasi?.toInt() ?: 0)
-
+                if (hasSelectingAnySymptomp()) {
+                    saveSymptomp(listSelectedIds, data.idKonsultasi.toString())
+                    moveToResultDiagnosis(data.idKonsultasi.toString())
+                    storeSelectedDataTemp()
+                }
                 Log.d(TAG, "onClick: $index => index terakhir")
-                Log.d(TAG, "onClick: $listSelectedSymptoms , isi list yang sudah dipilih")
+                Log.d(TAG, "onClick: $listSelectedIds , isi list yang sudah dipilih")
             }
         }
     }
 
-    private fun moveToResultDiagnosis(idConsult: Int) {
+    private fun hasSelectingAnySymptomp(): Boolean {
+        var state = false
+        if (numSelectedSymptomps == 0) {
+            binding.root.snackbar("Ada memilih setidaknya satu gejala.")
+        } else {
+            state = true
+        }
+        return state
+    }
+
+    private fun storeSelectedDataTemp() {
+        viewModel.setSelectedIdsSymtomps(listSelectedIds)
+        viewModel.setSelectedSymptomps(listSelectedSymptomps)
+    }
+
+    private fun moveToResultDiagnosis(idConsult: String) {
         val toResultDiagnosis =
             SymptompFragmentDirections.actionSymptompFragmentToResultFragment(idConsult)
         findNavController().navigate(toResultDiagnosis)
@@ -144,12 +167,12 @@ class SymptompFragment : Fragment(), View.OnClickListener {
 
     private fun nextCategory() {
         index++
-        if (index != categories.size) getSymptopByCategory(categories[index].idGejalaKategori)
+        if (index != categories.size) getSymptopByCategory(categories[index].idGejalaKategori.toString())
     }
 
     private fun previousCategory() {
         index--
-        if (index != -1) getSymptopByCategory(categories[index].idGejalaKategori)
+        if (index != -1) getSymptopByCategory(categories[index].idGejalaKategori.toString())
     }
 
     private fun loadCategory() {
@@ -159,7 +182,7 @@ class SymptompFragment : Fragment(), View.OnClickListener {
                     //store in arraylist
                     categories.addAll(it.result as ArrayList<ResultCategory>)
                     //force to load data the first symptomp category
-                    getSymptopByCategory(categories[index].idGejalaKategori)
+                    getSymptopByCategory(categories[index].idGejalaKategori.toString())
                     //prepareViews
                     prepareViews()
                 } else {
@@ -180,15 +203,15 @@ class SymptompFragment : Fragment(), View.OnClickListener {
         })
     }
 
-    private fun getSymptopByCategory(idGejalaKategori: Int?) {
-        viewModel.getSymptomp(idGejalaKategori ?: 0, data.idKonsultasi?.toInt() ?: 0)
+    private fun getSymptopByCategory(idGejalaKategori: String) {
+        viewModel.getSymptomp(idGejalaKategori, data.idKonsultasi.toString())
             .observe(viewLifecycleOwner, {
                 if (it != null) {
                     if (it.code == 200) {
                         // jika dia kembali maka check user saat checklis item sebelumnya
                         // dengan cara mengecek data result yang sudah ditambahkan
                         // check dulu jika user ada memilih gejala
-                        listSelectedSymptoms.forEachIndexed { _, idGejala ->
+                        listSelectedIds.forEachIndexed { _, idGejala ->
                             it.result!!.forEach { resultSymptoms ->
                                 if (resultSymptoms.idGejala == idGejala) {
                                     resultSymptoms.isSelected = true
@@ -226,34 +249,6 @@ class SymptompFragment : Fragment(), View.OnClickListener {
         idKonsultasi: String
     ) {
         viewModel.symptompConsult(listSelectedSymptoms, idKonsultasi).observe(viewLifecycleOwner, {
-            if (it != null) {
-                if (it.code == 200) {
-                    showMessage(
-                        requireActivity(),
-                        getString(R.string.message_title_succes),
-                        it.message ?: "",
-                        style = MotionToast.TOAST_SUCCESS
-                    )
-                } else {
-                    showMessage(
-                        requireActivity(),
-                        getString(R.string.message_title_failed),
-                        it.message ?: "",
-                        style = MotionToast.TOAST_ERROR
-                    )
-                }
-            } else {
-                showMessage(
-                    requireActivity(),
-                    getString(R.string.message_title_failed),
-                    style = MotionToast.TOAST_ERROR
-                )
-            }
-        })
-    }
-
-    private fun deleteUnselectedSymptom(idSymptom: String, idConsult: String) {
-        viewModel.deleteSymptomConsult(idSymptom, idConsult).observe(viewLifecycleOwner, {
             if (it != null) {
                 if (it.code == 200) {
                     showMessage(

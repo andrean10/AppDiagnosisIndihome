@@ -2,8 +2,10 @@ package com.kontrakanprojects.appbekamcbr.view.consult
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -27,6 +29,11 @@ class ConsultFragment : Fragment() {
         private const val NAME_IS_REQUIRED = "Nama Harus Di Isi"
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,10 +44,10 @@ class ConsultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setToolbarTitle()
 
         with(binding) {
-
-        btnConsultCreate.setOnClickListener { createConsult() }
+            btnConsultCreate.setOnClickListener { createConsult() }
         }
     }
 
@@ -76,6 +83,19 @@ class ConsultFragment : Fragment() {
         val toSymptomp =
             ConsultFragmentDirections.actionConsultFragmentToSymptompFragment(result)
         findNavController().navigate(toSymptomp)
+    }
+
+    private fun setToolbarTitle() {
+        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbar)
+        if ((activity as AppCompatActivity?)!!.supportActionBar != null) {
+            (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Buat Konsultasi"
+            (activity as AppCompatActivity?)!!.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) findNavController().navigateUp()
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {

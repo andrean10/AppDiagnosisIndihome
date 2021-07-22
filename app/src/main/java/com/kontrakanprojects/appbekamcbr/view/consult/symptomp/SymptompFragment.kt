@@ -3,8 +3,10 @@ package com.kontrakanprojects.appbekamcbr.view.consult.symptomp
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -29,9 +31,13 @@ class SymptompFragment : Fragment(), View.OnClickListener {
     private lateinit var data: ResultConsult
     private lateinit var categories: ArrayList<ResultCategory>
     private var index = 0
-    private var isPrevious = false
 
     private val TAG = SymptompFragment::class.simpleName
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +55,8 @@ class SymptompFragment : Fragment(), View.OnClickListener {
     }
 
     private fun initViews() {
+        setToolbar()
+
         symptompAdapter = SymptompAdapter()
         categories = ArrayList()
         with(binding) {
@@ -79,7 +87,9 @@ class SymptompFragment : Fragment(), View.OnClickListener {
                     btnSymptompDiagnosis.visibility = View.GONE
                 }
             }
-            tvSymptompCategory.text = categories[index].gejalaKategori
+//            tvSymptompCategory.text = categories[index].gejalaKategori
+
+            setTitle(categories[index].gejalaKategori.toString())
         }
 
         symptompAdapter.setOnItemClickCallback(object : SymptompAdapter.OnItemClickCallback {
@@ -115,7 +125,14 @@ class SymptompFragment : Fragment(), View.OnClickListener {
         when (v?.id) {
             R.id.btn_symptomp_next -> nextCategory()
             R.id.btn_symptomp_previous -> previousCategory()
-            R.id.btn_symptomp_diagnosis -> moveToResultDiagnosis(data.idKonsultasi?.toInt() ?: 0)
+            R.id.btn_symptomp_diagnosis -> {
+                saveSymptomp(listSelectedSymptoms, data.idKonsultasi.toString())
+
+                moveToResultDiagnosis(data.idKonsultasi?.toInt() ?: 0)
+
+                Log.d(TAG, "onClick: $index => index terakhir")
+                Log.d(TAG, "onClick: $listSelectedSymptoms , isi list yang sudah dipilih")
+            }
         }
     }
 
@@ -127,19 +144,12 @@ class SymptompFragment : Fragment(), View.OnClickListener {
 
     private fun nextCategory() {
         index++
-        if (index != categories.size) {
-            getSymptopByCategory(categories[index].idGejalaKategori)
-        } else {
-//            saveSymptomp(listSelectedSymptoms, data.idKonsultasi.toString())
-            Log.d(TAG, "nextCategory: $index => index terakhir")
-            Log.d(TAG, "nextCategory: $listSelectedSymptoms , isi list yang sudah dipilih")
-        }
+        if (index != categories.size) getSymptopByCategory(categories[index].idGejalaKategori)
     }
 
     private fun previousCategory() {
         index--
         if (index != -1) getSymptopByCategory(categories[index].idGejalaKategori)
-        isPrevious = true
     }
 
     private fun loadCategory() {
@@ -177,19 +187,16 @@ class SymptompFragment : Fragment(), View.OnClickListener {
                     if (it.code == 200) {
                         // jika dia kembali maka check user saat checklis item sebelumnya
                         // dengan cara mengecek data result yang sudah ditambahkan
-                        // lalu
-                        Log.d(TAG, "getSymptopByCategory: Apakah Kembali ? $isPrevious")
-                        if (isPrevious) {
-                            listSelectedSymptoms.forEachIndexed { _, idGejala ->
-                                it.result!!.forEach { resultSymptoms ->
-                                    if (resultSymptoms.idGejala == idGejala) {
-                                        resultSymptoms.isSelected = true
+                        // check dulu jika user ada memilih gejala
+                        listSelectedSymptoms.forEachIndexed { _, idGejala ->
+                            it.result!!.forEach { resultSymptoms ->
+                                if (resultSymptoms.idGejala == idGejala) {
+                                    resultSymptoms.isSelected = true
 
-                                        Log.d(
-                                            TAG,
-                                            "getSymptopByCategory: Dijalankan karena dipilih $resultSymptoms"
-                                        )
-                                    }
+                                    Log.d(
+                                        TAG,
+                                        "getSymptopByCategory: Dijalankan karena dipilih $resultSymptoms"
+                                    )
                                 }
                             }
                         }
@@ -273,8 +280,23 @@ class SymptompFragment : Fragment(), View.OnClickListener {
         })
     }
 
-    private fun deleteSymptom() {
+    private fun setToolbar() {
+        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbar)
+        if ((activity as AppCompatActivity?)!!.supportActionBar != null) {
+            (activity as AppCompatActivity?)!!.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        }
+    }
 
+    private fun setTitle(titleGejala: String) {
+        if ((activity as AppCompatActivity?)!!.supportActionBar != null) {
+            (activity as AppCompatActivity?)!!.supportActionBar!!.title =
+                "Kategori Gejala $titleGejala"
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) findNavController().navigateUp()
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {

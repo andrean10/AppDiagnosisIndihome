@@ -6,19 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".view.consult.symptomp.SymptompFragment">
 
-    <TextView
-        android:id="@+id/tv_symptomp_category"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/teal_200"
-        android:padding="10dp"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/success_color"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Kategori Gejala I" />
+        app:titleTextColor="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_symptomp_list"
@@ -28,10 +24,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toTopOf="@+id/btn_symptomp_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_symptomp_category"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:itemCount="8"
         tools:listitem="@layout/symptomp_item" />
 

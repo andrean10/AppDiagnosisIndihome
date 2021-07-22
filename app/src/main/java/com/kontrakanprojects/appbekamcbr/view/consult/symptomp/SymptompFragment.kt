@@ -167,11 +167,13 @@ class SymptompFragment : Fragment(), View.OnClickListener {
 
     private fun nextCategory() {
         index++
+        numSelectedSymptomps = 0
         if (index != categories.size) getSymptopByCategory(categories[index].idGejalaKategori.toString())
     }
 
     private fun previousCategory() {
         index--
+        numSelectedSymptomps = 0
         if (index != -1) getSymptopByCategory(categories[index].idGejalaKategori.toString())
     }
 
@@ -215,7 +217,7 @@ class SymptompFragment : Fragment(), View.OnClickListener {
                             it.result!!.forEach { resultSymptoms ->
                                 if (resultSymptoms.idGejala == idGejala) {
                                     resultSymptoms.isSelected = true
-
+                                    numSelectedSymptomps++
                                     Log.d(
                                         TAG,
                                         "getSymptopByCategory: Dijalankan karena dipilih $resultSymptoms"

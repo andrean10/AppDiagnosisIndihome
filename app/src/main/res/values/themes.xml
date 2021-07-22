@@ -37,6 +37,14 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="big_title">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:layout_marginStart">@dimen/dimen_16</item>
+        <item name="android:layout_marginEnd">@dimen/dimen_16</item>
+    </style>
+
     <style name="big_label">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">24sp</item>
@@ -48,6 +56,14 @@
     <style name="medium_label">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:layout_marginStart">@dimen/dimen_8</item>
+        <item name="android:layout_marginEnd">@dimen/dimen_16</item>
+    </style>
+
+    <style name="small_label">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/grey</item>
         <item name="android:layout_marginStart">@dimen/dimen_8</item>
         <item name="android:layout_marginEnd">@dimen/dimen_16</item>

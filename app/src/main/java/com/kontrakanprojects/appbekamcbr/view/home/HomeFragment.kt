@@ -43,7 +43,7 @@ class HomeFragment : Fragment(){
     }
 
     private fun setToolbarTitle() {
-        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbar)
+        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbarHome.toolbar)
         if ((activity as AppCompatActivity?)!!.supportActionBar != null) {
             (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Menu"
         }

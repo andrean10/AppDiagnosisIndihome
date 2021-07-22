@@ -89,7 +89,11 @@ class DaftarSolusiFragment : Fragment() {
                         val result = response.result
                         solutionAdapter.setData(result)
                     } else {
-                        dataNotFound(tvDaftarSolusiNotFound, response.message)
+                        dataNotFound(
+                            solusiEmptyView.imgEmptyData,
+                            solusiEmptyView.tvEmptyMessage,
+                            response.message
+                        )
                         showMessage(
                             requireActivity(),
                             getString(R.string.message_title_failed),
@@ -98,7 +102,7 @@ class DaftarSolusiFragment : Fragment() {
                         )
                     }
                 } else {
-                    dataNotFound(tvDaftarSolusiNotFound)
+                    dataNotFound(solusiEmptyView.imgEmptyData, solusiEmptyView.tvEmptyMessage)
                     showMessage(
                         requireActivity(),
                         getString(R.string.message_title_failed),

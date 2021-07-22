@@ -49,7 +49,7 @@
         <LinearLayout
             android:id="@+id/tv_detail_label_solusi"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
@@ -77,31 +77,33 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
+                android:text="@string/label_solution"
                 android:layout_marginTop="@dimen/dimen_16"
                 android:layout_marginStart="@dimen/dimen_16"
                 android:layout_marginEnd="@dimen/dimen_16"
-                android:text="Solusi"/>
+                android:visibility="gone" />
 
             <ListView
                 android:id="@+id/listview_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:listitem="@tools:sample/lorem"
-                android:visibility="invisible"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/dimen_16"
                 android:layout_marginStart="@dimen/dimen_16"
                 android:layout_marginEnd="@dimen/dimen_16" />
 
-            <TextView
-                android:id="@+id/tv_detail_not_found"
-                android:layout_width="match_parent"
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_16"
-                android:layout_marginTop="@dimen/dimen_8"
-                android:layout_marginEnd="@dimen/dimen_16"
-                android:visibility="gone"
-                tools:text="Data Kosong" />
+                android:layout_marginTop="@dimen/dimen_32"
+                android:visibility="gone" />
+
+            <include
+                android:id="@+id/detail_view_empty"
+                layout="@layout/empty_layout" />
 
         </LinearLayout>
 

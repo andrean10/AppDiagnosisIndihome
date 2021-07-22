@@ -81,7 +81,11 @@ class DaftarPenyakitFragment : Fragment() {
                         val result = response.result
                         diseasesAdapter.setData(result)
                     } else {
-                        dataNotFound(tvDaftarPenyakitNotFound, response.message)
+                        dataNotFound(
+                            penyakitEmptyView.imgEmptyData,
+                            penyakitEmptyView.tvEmptyMessage,
+                            response.message
+                        )
                         showMessage(
                             requireActivity(),
                             getString(R.string.message_title_failed),
@@ -90,7 +94,7 @@ class DaftarPenyakitFragment : Fragment() {
                         )
                     }
                 }else{
-                    dataNotFound(tvDaftarPenyakitNotFound)
+                    dataNotFound(penyakitEmptyView.imgEmptyData, penyakitEmptyView.tvEmptyMessage)
                     showMessage(
                         requireActivity(),
                         getString(R.string.message_title_failed),

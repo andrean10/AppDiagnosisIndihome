@@ -2,6 +2,7 @@ package com.kontrakanprojects.appbekamcbr.utils
 
 import android.app.Activity
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
@@ -78,9 +79,15 @@ fun isLoading(
     }
 }
 
-fun dataNotFound(ti: TextView, message: String? = "Data Kosong") {
+
+fun dataNotFound(
+    img: ImageView,
+    ti: TextView,
+    message: String? = "Data Gagal diperoleh, silahkan cek koneksi dan coba kembali."
+) {
     ti.visibility = View.VISIBLE
     ti.text = message
+    img.visibility = View.VISIBLE
 }
 
 fun isLoadingImage(state: Boolean, pb: ProgressBar) {

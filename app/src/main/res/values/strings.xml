@@ -124,7 +124,12 @@
     <string name="button_result_finish">selesai</string>
     <string name="button_change_symptomp">Ubah Gejala</string>
     <string name="label_solusi">Solusi</string>
-    <string name="label_consultation">Hasil Konsultasi</string>
+    <string name="label_consultation_result">Hasil Konsultasi</string>
     <string name="menu_diagnosa_finish">Selesai</string>
     <string name="menu_diagnosa_update_symptopm">Ubah Gejala</string>
+    <string name="message_welcome">Selamat Datang!</string>
+    <string name="text_guide_select_menu">Silahkan Memilih menu berikut ini</string>
+    <string name="text_guide_consultation">Silahkan memasukkan nama untuk memulai konsultasi.</string>
+    <string name="label_consultation">Buat Konsultasi</string>
+    <string name="label_solution">Solusi</string>
 </resources>

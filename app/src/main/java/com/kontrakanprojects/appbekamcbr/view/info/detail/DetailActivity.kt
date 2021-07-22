@@ -12,6 +12,7 @@ import com.kontrakanprojects.appbekamcbr.model.disease.ResultItem
 import com.kontrakanprojects.appbekamcbr.model.solution.Solution
 import com.kontrakanprojects.appbekamcbr.utils.EXTRA_OBJECT_TYPE
 import com.kontrakanprojects.appbekamcbr.utils.dataNotFound
+import com.kontrakanprojects.appbekamcbr.utils.isLoading
 import com.kontrakanprojects.appbekamcbr.utils.showMessage
 import com.kontrakanprojects.appbekamcbr.view.info.daftarpenyakit.DaftarPenyakitFragment.Companion.EXTRA_OBJECT_DISEASE
 import com.kontrakanprojects.appbekamcbr.view.info.daftarsolusi.DaftarSolusiFragment.Companion.EXTRA_OBJECT_SOLUTION
@@ -43,7 +44,8 @@ class DetailActivity : AppCompatActivity() {
                     idTvDetailName.text = disease?.nmPenyakit
                     tvDetailInfo.text = disease?.definisi
 
-                    //show solusi section
+                    //show solusi section and progressbar
+                    progressBar.visibility = View.VISIBLE
                     tvDetailLabelSolusi.visibility = View.VISIBLE
                     listviewDetail.visibility = View.VISIBLE
 
@@ -70,6 +72,7 @@ class DetailActivity : AppCompatActivity() {
     private fun observeDiseaseSolutions(idPenyakit: Int) {
         with(binding) {
             viewmodel.getDiseaseSolution(idPenyakit).observe(this@DetailActivity, {
+                isLoading(false, progressBar)
                 if (it != null) {
                     if (it.code == 200) {
                         val listSolution = parseToListString(it.result)
@@ -82,7 +85,8 @@ class DetailActivity : AppCompatActivity() {
                         listviewDetail.adapter = listAdapter
                     } else {
                         dataNotFound(
-                            tvDetailNotFound,
+                            detailViewEmpty.imgEmptyData,
+                            detailViewEmpty.tvEmptyMessage,
                             it.message
                         )
                         showMessage(
@@ -93,7 +97,8 @@ class DetailActivity : AppCompatActivity() {
                     }
                 } else {
                     dataNotFound(
-                        tvDetailNotFound
+                        detailViewEmpty.imgEmptyData,
+                        detailViewEmpty.tvEmptyMessage
                     )
                     showMessage(
                         this@DetailActivity,

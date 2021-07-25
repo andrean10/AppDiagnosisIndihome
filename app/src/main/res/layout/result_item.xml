@@ -39,13 +39,14 @@
 
         <TextView
             android:id="@+id/tv_result_case_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/materialDivider2"
+            app:layout_constraintEnd_toStartOf="@+id/textView6"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            tools:text="Rule Awal Ensimonia" />
+            tools:text="Rule Awal Kepribadian Ganda" />
 
         <TextView
             android:id="@+id/textView5"

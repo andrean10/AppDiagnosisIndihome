@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.kontrakanprojects.appbekamcbr.R
@@ -26,7 +25,6 @@ class HomeFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setToolbarTitle()
 
         with(binding) {
             homeConsultation.setOnClickListener { moveToConsultation() }
@@ -40,13 +38,6 @@ class HomeFragment : Fragment(){
 
     private fun moveToInfo() {
         findNavController().navigate(R.id.action_homeFragment_to_infoActivity)
-    }
-
-    private fun setToolbarTitle() {
-        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbarHome.toolbar)
-        if ((activity as AppCompatActivity?)!!.supportActionBar != null) {
-            (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Menu"
-        }
     }
 
     override fun onDestroy() {

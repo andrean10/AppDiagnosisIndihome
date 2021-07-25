@@ -21,8 +21,8 @@ class SymptompViewModel : ViewModel() {
     private var _categories: MutableLiveData<ResponseCategory>? = null
     private var _selectedIds: MutableLiveData<ArrayList<String>> = MutableLiveData()
     private var _selectedSymptomps: MutableLiveData<ArrayList<ResultSymptoms>> = MutableLiveData()
-//    private var _index: String =
 
+    private val TAG = SymptompViewModel::class.simpleName
 
     fun symptompConsult(
         listSelectedIdSymp: ArrayList<String>,
@@ -142,4 +142,8 @@ class SymptompViewModel : ViewModel() {
         })
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        Log.d(TAG, "onCleared: Dipanggil")
+    }
 }

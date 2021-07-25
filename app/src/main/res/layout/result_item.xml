@@ -47,7 +47,6 @@
             app:layout_constraintStart_toEndOf="@+id/imageView"
             tools:text="Rule Awal Ensimonia" />
 
-
         <TextView
             android:id="@+id/textView5"
             style="@style/medium_label"

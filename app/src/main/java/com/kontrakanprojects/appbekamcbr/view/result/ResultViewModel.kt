@@ -18,7 +18,6 @@ class ResultViewModel : ViewModel() {
     private var _solutions: MutableLiveData<ResponseDiseaseSolution>? = null
     private var _consult: MutableLiveData<ResponseConsult>? = null
 
-
     fun result(idConsult: String): LiveData<ResponseResult> {
         _result = MutableLiveData()
         getResult(idConsult)
@@ -31,13 +30,11 @@ class ResultViewModel : ViewModel() {
         return _solutions as MutableLiveData<ResponseDiseaseSolution>
     }
 
-
     fun resetingConsult(idConsult: String): LiveData<ResponseConsult> {
         _consult = MutableLiveData()
         resetConsult(idConsult)
         return _consult as MutableLiveData<ResponseConsult>
     }
-
 
     private fun getSolutions(idDisease: String) {
         val client = ApiConfig.getApiService().detailDisease(idDisease)

@@ -69,7 +69,6 @@ class DaftarPenyakitFragment : Fragment() {
                 }
             })
         }
-
     }
 
     private fun observeDisease(){

@@ -7,14 +7,9 @@ import com.kontrakanprojects.appbekamcbr.databinding.SymptompItemBinding
 import com.kontrakanprojects.appbekamcbr.model.symptoms.ResultSymptoms
 
 class SymptompAdapter : RecyclerView.Adapter<SymptompAdapter.SymptompViewHolder>() {
+
     private val listSymptomp = ArrayList<ResultSymptoms>()
-
-    //    private val listSelectedSymptomp = ArrayList<ResultSymptoms>()
     private var onItemClickCallback: OnItemClickCallback? = null
-
-    fun setSelectedSymtomp() {
-
-    }
 
     fun setData(listSymptomp: List<ResultSymptoms>?) {
         if (listSymptomp == null) return

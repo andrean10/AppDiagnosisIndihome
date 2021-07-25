@@ -8,7 +8,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiConfig {
     companion object {
         // local url
-        const val URL = "http://192.168.43.42:8080"
+//        const val URL = "http://192.168.43.42:8080"
+
+        // hosting url
+        const val URL = "http://cbr-bekam.rproject-dev.com"
 
         private const val ENDPOINT = "$URL/api/"
 

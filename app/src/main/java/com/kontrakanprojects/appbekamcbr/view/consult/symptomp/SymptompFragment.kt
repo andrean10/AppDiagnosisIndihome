@@ -114,12 +114,6 @@ class SymptompFragment : Fragment(), View.OnClickListener {
                 listSelectedIds.remove(symptom.idGejala ?: "")
                 listSelectedSymptomps.remove(symptom)
                 numSelectedSymptomps--
-                Log.d(TAG, "onItemSelected: $symptom telah dihapus")
-                Log.d(TAG, "onItemSelected: $listSelectedIds isi setelah dihapus")
-                Log.d(
-                    TAG,
-                    "onItemSelected: $listSelectedSymptomps isi setelah dihapus di kategori"
-                )
             }
         })
     }
@@ -138,8 +132,6 @@ class SymptompFragment : Fragment(), View.OnClickListener {
                     moveToResultDiagnosis(data.idKonsultasi.toString())
                     storeSelectedDataTemp()
                 }
-                Log.d(TAG, "onClick: $index => index terakhir")
-                Log.d(TAG, "onClick: $listSelectedIds , isi list yang sudah dipilih")
             }
         }
     }
@@ -147,7 +139,7 @@ class SymptompFragment : Fragment(), View.OnClickListener {
     private fun hasSelectingAnySymptomp(): Boolean {
         var state = false
         if (numSelectedSymptomps == 0) {
-            binding.root.snackbar("Ada memilih setidaknya satu gejala.")
+            binding.root.snackbar("Anda memilih setidaknya satu gejala.")
         } else {
             state = true
         }
@@ -287,7 +279,7 @@ class SymptompFragment : Fragment(), View.OnClickListener {
     private fun setTitle(titleGejala: String) {
         if ((activity as AppCompatActivity?)!!.supportActionBar != null) {
             (activity as AppCompatActivity?)!!.supportActionBar!!.title =
-                "Kategori Gejala $titleGejala"
+                "Kategori $titleGejala"
         }
     }
 

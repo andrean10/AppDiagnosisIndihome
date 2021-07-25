@@ -46,7 +46,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST("symptomp_consultation/create.php")
     fun addOrUpdateSymptompConsult(
-        @Field("list_id_gejala") listIdSymptoms: ArrayList<String>,
+        @Field("list_id_gejala[]") listIdSymptoms: ArrayList<String>,
         @Field("id_konsultasi") id: String
     ): Call<ResponseSymptomConsult>
 

@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.kontrakanprojects.appbekamcbr.R
 import com.kontrakanprojects.appbekamcbr.databinding.FragmentResultBinding
 import com.kontrakanprojects.appbekamcbr.model.disease.Disease
@@ -62,7 +61,6 @@ class ResultFragment : Fragment() {
 
     private fun backToConsultation() {
         observeResetConsult(dataIdConsult)
-        findNavController().navigateUp()
     }
 
     private fun finishConsultation() {
@@ -124,12 +122,7 @@ class ResultFragment : Fragment() {
         viewModel.resetingConsult(idConsult).observe(viewLifecycleOwner, {
             if (it != null) {
                 if (it.code == 200) {
-                    showMessage(
-                        requireActivity(),
-                        getString(R.string.message_title_succes),
-                        it.message,
-                        style = MotionToast.TOAST_SUCCESS
-                    )
+                    findNavController().navigateUp()
                 } else {
                     showMessage(
                         requireActivity(),

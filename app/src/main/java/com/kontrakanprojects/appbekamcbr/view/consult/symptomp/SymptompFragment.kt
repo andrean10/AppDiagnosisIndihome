@@ -1,7 +1,6 @@
 package com.kontrakanprojects.appbekamcbr.view.consult.symptomp
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -10,14 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.kontrakanprojects.appbekamcbr.R
 import com.kontrakanprojects.appbekamcbr.databinding.FragmentSymptompBinding
 import com.kontrakanprojects.appbekamcbr.model.category.ResultCategory
 import com.kontrakanprojects.appbekamcbr.model.consult.ResultConsult
 import com.kontrakanprojects.appbekamcbr.model.symptoms.ResultSymptoms
 import com.kontrakanprojects.appbekamcbr.utils.showMessage
-import com.kontrakanprojects.appbekamcbr.utils.snackbar
 import com.kontrakanprojects.appbekamcbr.view.consult.viewmodel.SymptompViewModel
 import www.sanju.motiontoast.MotionToast
 
@@ -58,7 +55,6 @@ class SymptompFragment : Fragment(), View.OnClickListener {
 
     private fun initViews() {
         setToolbar()
-
         symptompAdapter = SymptompAdapter()
         categories = ArrayList()
         with(binding) {
@@ -100,12 +96,6 @@ class SymptompFragment : Fragment(), View.OnClickListener {
                 listSelectedIds.add(symptom.idGejala.toString())
                 listSelectedSymptomps.add(symptom)
                 numSelectedSymptomps++
-                Log.d(TAG, "onItemSelected: $symptom telah ditambahkan")
-                Log.d(TAG, "onItemSelected: $listSelectedIds isi setelah ditambahkan")
-                Log.d(
-                    TAG,
-                    "onItemSelected: $listSelectedSymptomps isi setelah ditambahkan di kategori"
-                )
             }
 
             override fun onItemUnSelected(symptom: ResultSymptoms) {
@@ -210,10 +200,6 @@ class SymptompFragment : Fragment(), View.OnClickListener {
                                 if (resultSymptoms.idGejala == idGejala) {
                                     resultSymptoms.isSelected = true
                                     numSelectedSymptomps++
-                                    Log.d(
-                                        TAG,
-                                        "getSymptopByCategory: Dijalankan karena dipilih $resultSymptoms"
-                                    )
                                 }
                             }
                         }

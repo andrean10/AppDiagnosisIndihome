@@ -71,33 +71,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_16"
-                app:dividerInsetStart="16dp"
-                app:dividerInsetEnd="16dp"/>
+                app:dividerInsetEnd="16dp"
+                app:dividerInsetStart="16dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/label_solution"
-                android:layout_marginTop="@dimen/dimen_16"
                 android:layout_marginStart="@dimen/dimen_16"
+                android:layout_marginTop="@dimen/dimen_16"
                 android:layout_marginEnd="@dimen/dimen_16"
+                android:text="@string/label_solution"
                 android:visibility="gone" />
 
             <ListView
                 android:id="@+id/listview_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@tools:sample/lorem"
-                android:visibility="gone"
-                android:layout_marginTop="@dimen/dimen_16"
                 android:layout_marginStart="@dimen/dimen_16"
-                android:layout_marginEnd="@dimen/dimen_16" />
+                android:layout_marginTop="@dimen/dimen_16"
+                android:layout_marginEnd="@dimen/dimen_16"
+                android:visibility="gone"
+                tools:listitem="@tools:sample/lorem" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
                 android:layout_width="wrap_content"
-                android:layout_gravity="center"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dimen_32"
                 android:visibility="gone" />
 

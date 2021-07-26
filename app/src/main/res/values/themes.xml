@@ -23,7 +23,7 @@
     <style name="CustomCardStyle" parent="@style/Widget.MaterialComponents.CardView">
         <item name="shapeAppearanceOverlay">@style/custom_card_corners</item>
     </style>
-    
+
     <style name="custom_card_corners">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopLeft">25dp</item>

@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.kontrakanprojects.appbekamcbr.R
 import com.kontrakanprojects.appbekamcbr.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment(){
+class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!

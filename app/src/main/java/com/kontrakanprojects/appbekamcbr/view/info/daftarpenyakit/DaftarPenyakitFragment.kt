@@ -1,23 +1,14 @@
 package com.kontrakanprojects.appbekamcbr.view.info.daftarpenyakit
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.kontrakanprojects.appbekamcbr.R
 import com.kontrakanprojects.appbekamcbr.databinding.FragmentDaftarPenyakitBinding
 import com.kontrakanprojects.appbekamcbr.model.disease.Disease
-import com.kontrakanprojects.appbekamcbr.utils.EXTRA_OBJECT_TYPE
-import com.kontrakanprojects.appbekamcbr.utils.dataNotFound
-import com.kontrakanprojects.appbekamcbr.utils.isLoading
-import com.kontrakanprojects.appbekamcbr.utils.showMessage
-import com.kontrakanprojects.appbekamcbr.view.info.detail.DetailActivity
 import com.kontrakanprojects.appbekamcbr.view.info.viewmodel.InfoViewModel
-import www.sanju.motiontoast.MotionToast
 
 class DaftarPenyakitFragment : Fragment() {
 
@@ -30,6 +21,7 @@ class DaftarPenyakitFragment : Fragment() {
         fun newInstance(): DaftarPenyakitFragment {
             return DaftarPenyakitFragment()
         }
+
         const val EXTRA_OBJECT_DISEASE = "EXTRA_OBJECT_DISEASE"
     }
 
@@ -44,16 +36,17 @@ class DaftarPenyakitFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(binding){
+        with(binding) {
             diseasesAdapter = DaftarPenyakitAdapter()
-            with(rvDaftarPenyakitList){
+            with(rvDaftarPenyakitList) {
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
                 this.adapter = diseasesAdapter
             }
 
             observeDisease()
-            diseasesAdapter.setOnItemClickCallBack(object : DaftarPenyakitAdapter.OnItemClickCallBack {
+            diseasesAdapter.setOnItemClickCallBack(object :
+                DaftarPenyakitAdapter.OnItemClickCallBack {
                 override fun onItemClicked(disease: Disease) {
                     // send to db parcel
                     val dataDisease = Disease(
@@ -71,8 +64,8 @@ class DaftarPenyakitFragment : Fragment() {
         }
     }
 
-    private fun observeDisease(){
-        with(binding){
+    private fun observeDisease() {
+        with(binding) {
             viewmodel.getListDisease().observe(viewLifecycleOwner, { response ->
                 isLoading(false, progressBar)
                 if (response != null) {
@@ -92,7 +85,7 @@ class DaftarPenyakitFragment : Fragment() {
                             style = MotionToast.TOAST_ERROR
                         )
                     }
-                }else{
+                } else {
                     dataNotFound(penyakitEmptyView.imgEmptyData, penyakitEmptyView.tvEmptyMessage)
                     showMessage(
                         requireActivity(),

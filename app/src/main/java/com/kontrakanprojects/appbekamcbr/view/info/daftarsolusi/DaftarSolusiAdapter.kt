@@ -7,7 +7,7 @@ import com.kontrakanprojects.appbekamcbr.databinding.InfoItemBinding
 import com.kontrakanprojects.appbekamcbr.model.solution.Solution
 import com.kontrakanprojects.appbekamcbr.view.info.daftarsolusi.DaftarSolusiAdapter.DaftarSolusiViewHolder
 
-class DaftarSolusiAdapter: RecyclerView.Adapter<DaftarSolusiViewHolder>() {
+class DaftarSolusiAdapter : RecyclerView.Adapter<DaftarSolusiViewHolder>() {
     private val listSolution = ArrayList<Solution>()
     private var onItemClickCallBack: OnItemClickCallBack? = null
 
@@ -23,7 +23,7 @@ class DaftarSolusiAdapter: RecyclerView.Adapter<DaftarSolusiViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DaftarSolusiViewHolder {
-        val binding = InfoItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = InfoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DaftarSolusiViewHolder(binding)
     }
 
@@ -35,9 +35,10 @@ class DaftarSolusiAdapter: RecyclerView.Adapter<DaftarSolusiViewHolder>() {
         return listSolution.size
     }
 
-    inner class DaftarSolusiViewHolder(private val binding: InfoItemBinding): RecyclerView.ViewHolder(binding.root){
+    inner class DaftarSolusiViewHolder(private val binding: InfoItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(solution: Solution) {
-            with(binding){
+            with(binding) {
                 tvInfoKode.text = solution.kdSolusi
                 tvInfoName.text = solution.nmSolusi
 
@@ -46,7 +47,7 @@ class DaftarSolusiAdapter: RecyclerView.Adapter<DaftarSolusiViewHolder>() {
         }
     }
 
-    interface OnItemClickCallBack{
+    interface OnItemClickCallBack {
         fun onItemClicked(solution: Solution)
     }
 }

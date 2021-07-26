@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kontrakanprojects.appbekamcbr.databinding.InfoItemBinding
 import com.kontrakanprojects.appbekamcbr.model.disease.Disease
 
-class DaftarPenyakitAdapter: RecyclerView.Adapter<DaftarPenyakitAdapter.DaftarPenyakitViewHolder> () {
+class DaftarPenyakitAdapter :
+    RecyclerView.Adapter<DaftarPenyakitAdapter.DaftarPenyakitViewHolder>() {
     private val listDisease = ArrayList<Disease>()
     private var onItemClickCallBack: OnItemClickCallBack? = null
 
@@ -22,7 +23,7 @@ class DaftarPenyakitAdapter: RecyclerView.Adapter<DaftarPenyakitAdapter.DaftarPe
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DaftarPenyakitViewHolder {
-        val binding = InfoItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = InfoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DaftarPenyakitViewHolder(binding)
     }
 
@@ -34,9 +35,10 @@ class DaftarPenyakitAdapter: RecyclerView.Adapter<DaftarPenyakitAdapter.DaftarPe
         return listDisease.size
     }
 
-    inner class DaftarPenyakitViewHolder(private val binding:  InfoItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class DaftarPenyakitViewHolder(private val binding: InfoItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(disease: Disease) {
-            with(binding){
+            with(binding) {
                 tvInfoKode.text = disease.kdPenyakit
                 tvInfoName.text = disease.nmPenyakit
 
@@ -46,7 +48,7 @@ class DaftarPenyakitAdapter: RecyclerView.Adapter<DaftarPenyakitAdapter.DaftarPe
 
     }
 
-    interface OnItemClickCallBack{
+    interface OnItemClickCallBack {
         fun onItemClicked(disease: Disease)
     }
 }

@@ -10,7 +10,7 @@ import com.kontrakanprojects.appbekamcbr.network.ApiConfig
 import retrofit2.Call
 import retrofit2.Response
 
-class DetailViewModel: ViewModel() {
+class DetailViewModel : ViewModel() {
     private var _diseaseSolution: MutableLiveData<ResponseDiseaseSolution>? = null
 
     fun getDiseaseSolution(idDisease: String): LiveData<ResponseDiseaseSolution> {

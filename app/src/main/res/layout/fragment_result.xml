@@ -40,12 +40,13 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/dimen_16"
-            android:nestedScrollingEnabled="true"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
             android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialDivider"
-            tools:itemCount="2"
             tools:listitem="@layout/result_item" />
 
         <TextView
@@ -83,24 +84,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
-        <ListView
-            android:id="@+id/listview_detail"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_solusi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_16"
-            android:nestedScrollingEnabled="true"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
             android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialDivider2"
-            tools:listitem="@tools:sample/lorem" />
+            tools:itemCount="2"
+            tools:listitem="@layout/solusi_item" />
 
         <ProgressBar
             android:id="@+id/progressBar_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/listview_detail"
+            app:layout_constraintBottom_toTopOf="@+id/tv_result_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -116,7 +120,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/button_result_change"
-            app:layout_constraintTop_toBottomOf="@+id/listview_detail" />
+            app:layout_constraintTop_toBottomOf="@+id/rv_solusi" />
 
         <Button
             android:id="@+id/button_result_change"
@@ -129,7 +133,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button_result_finish"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listview_detail" />
+            app:layout_constraintTop_toBottomOf="@+id/rv_solusi" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

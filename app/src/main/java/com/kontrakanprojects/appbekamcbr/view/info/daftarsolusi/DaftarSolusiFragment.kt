@@ -1,14 +1,23 @@
 package com.kontrakanprojects.appbekamcbr.view.info.daftarsolusi
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.kontrakanprojects.appbekamcbr.R
 import com.kontrakanprojects.appbekamcbr.databinding.FragmentDaftarSolusiBinding
 import com.kontrakanprojects.appbekamcbr.model.solution.Solution
+import com.kontrakanprojects.appbekamcbr.utils.EXTRA_OBJECT_TYPE
+import com.kontrakanprojects.appbekamcbr.utils.dataNotFound
+import com.kontrakanprojects.appbekamcbr.utils.isLoading
+import com.kontrakanprojects.appbekamcbr.utils.showMessage
+import com.kontrakanprojects.appbekamcbr.view.info.detail.DetailActivity
 import com.kontrakanprojects.appbekamcbr.view.info.viewmodel.InfoViewModel
+import www.sanju.motiontoast.MotionToast
 
 class DaftarSolusiFragment : Fragment() {
 
@@ -52,12 +61,15 @@ class DaftarSolusiFragment : Fragment() {
                 setHasFixedSize(true)
                 this.adapter = solutionAdapter
             }
+
             observeSolutions()
+
             solutionAdapter.setOnItemClickCallBack(object :
                 DaftarSolusiAdapter.OnItemClickCallBack {
                 override fun onItemClicked(solution: Solution) {
                     // send to db parcel
                     val dataSolution = Solution(
+                        solution.gambar,
                         solution.keterangan,
                         solution.idSolusi,
                         solution.kdSolusi,

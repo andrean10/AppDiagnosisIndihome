@@ -11,9 +11,10 @@ class ApiConfig {
 //        const val URL = "http://192.168.43.42:8080"
 
         // hosting url
-        const val URL = "http://cbr-bekam.rproject-dev.com"
+        const val URL = "https://cbr-bekam.rproject-dev.com"
 
-        private const val ENDPOINT = "$URL/api/"
+        private const val ENDPOINT = "$URL/api_cbr/api/"
+        const val ENDPOINT_IMAGES = "$URL/"
 
         private fun client(): OkHttpClient {
             val logging = HttpLoggingInterceptor()

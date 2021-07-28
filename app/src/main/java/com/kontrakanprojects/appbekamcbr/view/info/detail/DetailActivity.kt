@@ -5,11 +5,13 @@ import android.view.View
 import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.kontrakanprojects.appbekamcbr.R
 import com.kontrakanprojects.appbekamcbr.databinding.ActivityDetailBinding
 import com.kontrakanprojects.appbekamcbr.model.disease.Disease
-import com.kontrakanprojects.appbekamcbr.model.disease.ResultItem
+import com.kontrakanprojects.appbekamcbr.model.disease.ResultsDiseaseSolution
 import com.kontrakanprojects.appbekamcbr.model.solution.Solution
+import com.kontrakanprojects.appbekamcbr.network.ApiConfig
 import com.kontrakanprojects.appbekamcbr.utils.EXTRA_OBJECT_TYPE
 import com.kontrakanprojects.appbekamcbr.utils.dataNotFound
 import com.kontrakanprojects.appbekamcbr.utils.isLoading
@@ -57,6 +59,13 @@ class DetailActivity : AppCompatActivity() {
                     idTvDetailCode.text = solution?.kdSolusi
                     idTvDetailName.text = solution?.nmSolusi
                     tvDetailInfo.text = solution?.keterangan
+
+                    imgSolusi.visibility = View.VISIBLE
+                    Glide.with(this@DetailActivity)
+                        .load(ApiConfig.ENDPOINT_IMAGES + solution?.gambar)
+                        .placeholder(R.drawable.img_not_found)
+                        .error(R.drawable.img_not_found)
+                        .into(imgSolusi)
                 } else {
                     showMessage(
                         this@DetailActivity,
@@ -110,15 +119,15 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun parseToListString(result: List<ResultItem?>?): List<String> {
+    private fun parseToListString(result: List<ResultsDiseaseSolution>?): List<String> {
         val list: MutableList<String> = mutableListOf()
         result?.forEach { item ->
             val stringBuilder = StringBuilder()
             stringBuilder.append("[")
-            stringBuilder.append(item?.solution?.kdSolusi)
+            stringBuilder.append(item.solution?.kdSolusi)
             stringBuilder.append("]")
             stringBuilder.append("\t")
-            stringBuilder.append(item?.solution?.nmSolusi)
+            stringBuilder.append(item.solution?.nmSolusi)
             list.add(stringBuilder.toString())
         }
         return list

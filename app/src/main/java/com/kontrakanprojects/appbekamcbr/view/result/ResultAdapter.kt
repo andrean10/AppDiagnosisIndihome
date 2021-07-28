@@ -39,7 +39,7 @@ class ResultAdapter : RecyclerView.Adapter<ResultAdapter.ResultViewHolder>() {
         diseaseResult = selected
     }
 
-    private fun convertToPercent(nilai: String?): String? {
+    private fun convertToPercent(nilai: String?): String {
         val roundedValue = String.format(Locale.ENGLISH, "%.2f", nilai?.toBigDecimal()).toDouble()
         val calculate = roundedValue * 100
 
@@ -59,9 +59,7 @@ class ResultAdapter : RecyclerView.Adapter<ResultAdapter.ResultViewHolder>() {
         holder.bind(listResult[position])
     }
 
-    override fun getItemCount(): Int {
-        return listResult.size
-    }
+    override fun getItemCount() = listResult.size
 
     inner class ResultViewHolder(private val binding: ResultItemBinding) :
         RecyclerView.ViewHolder(binding.root) {

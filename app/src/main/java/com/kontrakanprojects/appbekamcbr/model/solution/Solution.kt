@@ -6,6 +6,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Solution(
+    @field:SerializedName("gambar")
+    val gambar: String? = null,
+
     @field:SerializedName("keterangan")
     val keterangan: String? = null,
 

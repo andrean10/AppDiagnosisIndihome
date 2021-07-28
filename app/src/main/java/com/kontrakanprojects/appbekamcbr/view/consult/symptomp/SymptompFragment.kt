@@ -9,12 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kontrakanprojects.appbekamcbr.R
 import com.kontrakanprojects.appbekamcbr.databinding.FragmentSymptompBinding
 import com.kontrakanprojects.appbekamcbr.model.category.ResultCategory
 import com.kontrakanprojects.appbekamcbr.model.consult.ResultConsult
 import com.kontrakanprojects.appbekamcbr.model.symptoms.ResultSymptoms
 import com.kontrakanprojects.appbekamcbr.utils.showMessage
+import com.kontrakanprojects.appbekamcbr.utils.snackbar
 import com.kontrakanprojects.appbekamcbr.view.consult.viewmodel.SymptompViewModel
 import www.sanju.motiontoast.MotionToast
 

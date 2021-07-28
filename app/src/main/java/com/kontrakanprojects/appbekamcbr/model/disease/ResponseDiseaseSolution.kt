@@ -6,16 +6,16 @@ import com.kontrakanprojects.appbekamcbr.model.solution.Solution
 data class ResponseDiseaseSolution(
 
     @field:SerializedName("result")
-    val result: List<ResultItem?>? = null,
+    val result: List<ResultsDiseaseSolution>? = null,
 
     @field:SerializedName("code")
-    val code: Int? = null,
+    val code: Int,
 
     @field:SerializedName("message")
-    val message: String? = null
+    val message: String
 )
 
-data class ResultItem(
+data class ResultsDiseaseSolution(
 
     @field:SerializedName("id_penyakit_solusi")
     val idPenyakitSolusi: Int? = null,

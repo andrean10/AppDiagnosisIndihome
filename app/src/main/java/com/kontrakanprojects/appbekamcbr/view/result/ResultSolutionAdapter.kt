@@ -8,6 +8,7 @@ import com.kontrakanprojects.appbekamcbr.R
 import com.kontrakanprojects.appbekamcbr.databinding.SolusiItemBinding
 import com.kontrakanprojects.appbekamcbr.model.disease.Disease
 import com.kontrakanprojects.appbekamcbr.model.disease.ResultsDiseaseSolution
+import com.kontrakanprojects.appbekamcbr.network.ApiConfig
 
 class ResultSolutionAdapter :
     RecyclerView.Adapter<ResultSolutionAdapter.ResultSolutionViewHolder>() {
@@ -47,7 +48,7 @@ class ResultSolutionAdapter :
         fun bind(resultsDiseaseSolution: ResultsDiseaseSolution) {
             with(binding) {
                 Glide.with(itemView.context)
-                    .load(resultsDiseaseSolution.solution?.gambar)
+                    .load(ApiConfig.Companion.ENDPOINT_IMAGES + resultsDiseaseSolution.solution?.gambar)
                     .placeholder(R.drawable.img_not_found)
                     .error(R.drawable.img_not_found)
                     .into(imgSolusi)

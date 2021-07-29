@@ -75,19 +75,30 @@ class SymptompFragment : Fragment(), View.OnClickListener {
     private fun prepareViews() {
         with(binding) {
             //show-hide buttons based category index
-            when (index) {
-                0 -> btnSymptompPrevious.visibility = View.INVISIBLE
-                categories.size - 1 -> {
-                    btnSymptompDiagnosis.visibility = View.VISIBLE
-                    btnSymptompPrevious.visibility = View.VISIBLE
-                    btnSymptompNext.visibility = View.GONE
+            if (categories.size == 0) {
+                when (index) {
+                    0 -> {
+                        btnSymptompDiagnosis.visibility = View.VISIBLE
+                        btnSymptompPrevious.visibility = View.INVISIBLE
+                        btnSymptompNext.visibility = View.GONE
+                    }
                 }
-                else -> {
-                    btnSymptompPrevious.visibility = View.VISIBLE
-                    btnSymptompNext.visibility = View.VISIBLE
-                    btnSymptompDiagnosis.visibility = View.GONE
+            } else {
+                when (index) {
+                    0 -> btnSymptompPrevious.visibility = View.INVISIBLE
+                    categories.size - 1 -> {
+                        btnSymptompDiagnosis.visibility = View.VISIBLE
+                        btnSymptompPrevious.visibility = View.VISIBLE
+                        btnSymptompNext.visibility = View.GONE
+                    }
+                    else -> {
+                        btnSymptompPrevious.visibility = View.VISIBLE
+                        btnSymptompNext.visibility = View.VISIBLE
+                        btnSymptompDiagnosis.visibility = View.GONE
+                    }
                 }
             }
+
             setTitle(categories[index].gejalaKategori.toString())
         }
 
@@ -150,13 +161,13 @@ class SymptompFragment : Fragment(), View.OnClickListener {
     }
 
     private fun nextCategory() {
-        index++
+        if (categories.size != 1) index++
         numSelectedSymptomps = 0
         if (index != categories.size) getSymptopByCategory(categories[index].idGejalaKategori.toString())
     }
 
     private fun previousCategory() {
-        index--
+        if (categories.size != 1) index--
         numSelectedSymptomps = 0
         if (index != -1) getSymptopByCategory(categories[index].idGejalaKategori.toString())
     }

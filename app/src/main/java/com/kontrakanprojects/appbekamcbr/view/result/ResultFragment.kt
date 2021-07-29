@@ -50,7 +50,7 @@ class ResultFragment : Fragment() {
             resultAdapter = ResultAdapter()
             with(rvResultCase) {
                 layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
                 this.adapter = resultAdapter
             }

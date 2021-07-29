@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="320dp"
-    android:layout_height="280dp"
+    android:layout_height="300dp"
     android:layout_marginEnd="@dimen/dimen_12"
     app:cardBackgroundColor="?attr/colorSecondary"
     app:cardCornerRadius="@dimen/dimen_4"
@@ -22,7 +22,7 @@
             <ImageView
                 android:id="@+id/img_solusi"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="170dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

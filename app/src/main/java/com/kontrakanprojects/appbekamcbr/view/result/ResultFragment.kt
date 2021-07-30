@@ -45,7 +45,6 @@ class ResultFragment : Fragment() {
 
     private fun initViews() {
         with(binding) {
-            buttonResultChange.setOnClickListener { backToConsultation() }
             buttonResultFinish.setOnClickListener { finishConsultation() }
             resultAdapter = ResultAdapter()
             with(rvResultCase) {
@@ -59,10 +58,6 @@ class ResultFragment : Fragment() {
         dataIdConsult = ResultFragmentArgs.fromBundle(arguments as Bundle).idConsultation
 
         observeResult(dataIdConsult)
-    }
-
-    private fun backToConsultation() {
-        observeResetConsult(dataIdConsult)
     }
 
     private fun finishConsultation() {
@@ -107,29 +102,6 @@ class ResultFragment : Fragment() {
                         requireActivity(),
                         getString(R.string.message_title_failed),
                         it.message ?: "",
-                        style = MotionToast.TOAST_ERROR
-                    )
-                }
-            } else {
-                showMessage(
-                    requireActivity(),
-                    getString(R.string.message_title_failed),
-                    style = MotionToast.TOAST_ERROR
-                )
-            }
-        })
-    }
-
-    private fun observeResetConsult(idConsult: String) {
-        viewModel.resetingConsult(idConsult).observe(viewLifecycleOwner, {
-            if (it != null) {
-                if (it.code == 200) {
-                    findNavController().navigateUp()
-                } else {
-                    showMessage(
-                        requireActivity(),
-                        getString(R.string.message_title_failed),
-                        it.message,
                         style = MotionToast.TOAST_ERROR
                     )
                 }

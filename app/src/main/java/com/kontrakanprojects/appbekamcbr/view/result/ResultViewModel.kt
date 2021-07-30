@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
-import com.kontrakanprojects.appbekamcbr.model.consult.ResponseConsult
 import com.kontrakanprojects.appbekamcbr.model.disease.ResponseDiseaseSolution
 import com.kontrakanprojects.appbekamcbr.model.result.ResponseResult
 import com.kontrakanprojects.appbekamcbr.network.ApiConfig
@@ -16,7 +15,6 @@ import retrofit2.Response
 class ResultViewModel : ViewModel() {
     private var _result: MutableLiveData<ResponseResult>? = null
     private var _solutions: MutableLiveData<ResponseDiseaseSolution>? = null
-    private var _consult: MutableLiveData<ResponseConsult>? = null
 
     fun result(idConsult: String): LiveData<ResponseResult> {
         _result = MutableLiveData()
@@ -28,12 +26,6 @@ class ResultViewModel : ViewModel() {
         _solutions = MutableLiveData()
         getSolutions(idDisease)
         return _solutions as MutableLiveData<ResponseDiseaseSolution>
-    }
-
-    fun resetingConsult(idConsult: String): LiveData<ResponseConsult> {
-        _consult = MutableLiveData()
-        resetConsult(idConsult)
-        return _consult as MutableLiveData<ResponseConsult>
     }
 
     private fun getSolutions(idDisease: String) {
@@ -83,32 +75,5 @@ class ResultViewModel : ViewModel() {
             }
         })
     }
-
-    private fun resetConsult(idConsult: String) {
-        val client = ApiConfig.getApiService().resetConsult(idConsult)
-        client.enqueue(object : Callback<ResponseConsult> {
-            override fun onResponse(
-                call: Call<ResponseConsult>,
-                response: Response<ResponseConsult>
-            ) {
-                if (response.isSuccessful) {
-                    _consult?.postValue(response.body())
-                } else {
-                    val error = Gson().fromJson(
-                        response.errorBody()?.string(),
-                        ResponseConsult::class.java
-                    )
-                    _consult?.postValue(error)
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseConsult>, t: Throwable) {
-                _consult?.postValue(null)
-                Log.e("Failure Response ", t.message ?: "")
-            }
-
-        })
-    }
-
 
 }

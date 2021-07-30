@@ -50,12 +50,6 @@ interface ApiService {
         @Field("id_konsultasi") id: String
     ): Call<ResponseSymptomConsult>
 
-    @DELETE("symptomp_consultation/delete.php/{konsultasi}")
-    fun resetConsult(
-        @Path("konsultasi") id_konsultasi: String
-    ): Call<ResponseConsult>
-
-
     /** CONSULT ROUTE */
 
     @GET("consultation-result/read.php")

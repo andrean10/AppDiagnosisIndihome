@@ -118,21 +118,8 @@
             android:text="@string/button_result_finish"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button_result_change"
             app:layout_constraintTop_toBottomOf="@+id/rv_solusi" />
 
-        <Button
-            android:id="@+id/button_result_change"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="@dimen/dimen_8"
-            android:layout_marginBottom="@dimen/dimen_8"
-            android:text="@string/button_change_symptomp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button_result_finish"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_solusi" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

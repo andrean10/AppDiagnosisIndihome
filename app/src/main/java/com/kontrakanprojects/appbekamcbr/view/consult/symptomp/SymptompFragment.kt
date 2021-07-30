@@ -75,7 +75,7 @@ class SymptompFragment : Fragment(), View.OnClickListener {
     private fun prepareViews() {
         with(binding) {
             //show-hide buttons based category index
-            if (categories.size == 0) {
+            if (categories.size == 1) {
                 when (index) {
                     0 -> {
                         btnSymptompDiagnosis.visibility = View.VISIBLE
